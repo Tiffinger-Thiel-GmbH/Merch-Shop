@@ -2,7 +2,8 @@
 CREATE TABLE "User" (
     "id" TEXT NOT NULL,
     "email" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
+    "createdAt" TIMESTAMPTZ(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
@@ -10,8 +11,10 @@ CREATE TABLE "User" (
 -- CreateTable
 CREATE TABLE "Products" (
     "id" TEXT NOT NULL,
-    "productName" TEXT NOT NULL,
-    "productSize" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "size" TEXT,
+    "description" TEXT,
+    "createdAt" TIMESTAMPTZ(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Products_pkey" PRIMARY KEY ("id")
 );
