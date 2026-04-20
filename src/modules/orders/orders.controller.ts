@@ -2,10 +2,11 @@ import { Controller, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { OrdersService } from './orders.service';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
+import { PrismaService } from '../../prisma/prisma.service';
 
 @Controller('orders')
 export class OrdersController {
-  constructor(private readonly ordersService: OrdersService) {}
+  constructor(private readonly prisma: PrismaService) {}
 
   @Post()
   create(@Body() createOrderDto: CreateOrderDto) {
