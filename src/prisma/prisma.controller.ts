@@ -19,16 +19,16 @@ export class PrismaController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.prismaService.findOne(+id);
+    return this.prismaService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updatePrismaDto: UpdatePrismaDto) {
-    return this.prismaService.update(+id, updatePrismaDto);
+    return this.prismaService.update(id, updatePrismaDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.prismaService.remove(+id);
+    return this.prismaService.remove(id);
   }
 }

@@ -1,6 +1,4 @@
-import { IsNotEmpty, IsString, IsUUID, MaxLength } from '@nestjs/class-validator';
-import { UUID } from 'crypto';
-import { Timestamp } from 'typeorm';
+import { IsNotEmpty, IsOptional, IsString, MaxLength } from '@nestjs/class-validator';
 
 export class CreateOrderDto {
   @MaxLength(128)
@@ -9,17 +7,10 @@ export class CreateOrderDto {
   name: string;
 
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   size?: string;
 
-  @IsUUID()
-  @IsNotEmpty()
-  id: UUID;
-
   @IsString()
-  @IsNotEmpty()
-  costumer: string;
-
-  @IsNotEmpty()
-  createdAt: Timestamp;
+  @IsOptional()
+  description?: string;
 }
