@@ -4,8 +4,8 @@
 
 ```sh
 npm install
-npm run prisma generate
 docker compose up  # start postgres
+npm run prisma generate
 ```
 
 ## Starting the API
