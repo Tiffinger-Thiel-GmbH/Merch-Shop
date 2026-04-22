@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { Logger } from '@nestjs/common';
 
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
@@ -11,8 +12,7 @@ async function bootstrap(): Promise<void> {
   app.enableShutdownHooks();
   await app.listen(process.env.PORT ?? 3000);
   const url = await app.getUrl();
-  const swaggerUrl = url.endsWith('/') ? `${url}api` : `${url}/api`;
-  console.log(`Swagger UI is running on port: ${swaggerUrl}`);
+  Logger.log(`Swagger UI runs on port: ${url}/api`);
 }
 
 void bootstrap();
