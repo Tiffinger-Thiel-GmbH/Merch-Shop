@@ -15,7 +15,7 @@ model User {
   createdAt DateTime  @default(now()) @db.Timestamptz(6)
 }
 
-model Products {
+model Product {
   id        String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name   String    
   size   String?

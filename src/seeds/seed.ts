@@ -12,8 +12,8 @@ const prisma = new PrismaClient({ adapter });
 
 async function main(): Promise<void> {
   for (const data of productsData) {
-    await prisma.products.upsert({
-      where: { name: data.name, size: data.size, id: data.id, description: data.description },
+    await prisma.product.upsert({
+      where: { id: data.id },
       update: data,
       create: data,
     });

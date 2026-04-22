@@ -12,7 +12,7 @@ async function bootstrap(): Promise<void> {
   app.enableShutdownHooks();
   await app.listen(process.env.PORT ?? 3000);
   const url = await app.getUrl();
-  Logger.log(`Swagger UI runs on port: ${url}/api`);
+  Logger.log(`Swagger UI is running at: ${url}/api`);
 }
 
 void bootstrap();
