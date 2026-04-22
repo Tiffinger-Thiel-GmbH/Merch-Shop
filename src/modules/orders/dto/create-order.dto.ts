@@ -1,16 +1,17 @@
-import { IsNotEmpty, IsOptional, IsString, MaxLength } from '@nestjs/class-validator';
+import { IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator';
 
 export class CreateOrderDto {
-  @MaxLength(128)
   @IsString()
   @IsNotEmpty()
-  name: string;
+  @MaxLength(128)
+  name!: string;
 
   @IsString()
   @IsOptional()
   size?: string;
 
   @IsString()
-  @IsOptional()
-  description?: string;
+  @IsNotEmpty()
+  @MaxLength(128)
+  costumer!: string;
 }

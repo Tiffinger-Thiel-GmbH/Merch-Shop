@@ -1,8 +1,10 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { ApiExcludeController } from '@nestjs/swagger';
 import { PrismaService } from './prisma.service';
 import { CreatePrismaDto } from './dto/create-prisma.dto';
 import { UpdatePrismaDto } from './dto/update-prisma.dto';
 
+@ApiExcludeController()
 @Controller('prisma')
 export class PrismaController {
   constructor(private readonly prismaService: PrismaService) {}
