@@ -12,6 +12,6 @@ npm run prisma generate
 ## Starting the API
 
 ```sh
+npm run prisma:reset    # reset and reseed the db for dev before starting the dev server
 npm run start:dev
-npm run prisma:reset    # reset and reseed the db for dev
 ```
