@@ -1,6 +1,6 @@
-import { ProductDTO } from '../modules/products/dtos/product.dto';
+import { OrderCreateManyInput, OrderItemCreateManyInput, ProductCreateInput, UserCreateManyInput } from '../generated/prisma/models';
 
-export const productsData: ProductDTO[] = [
+export const productsData: ProductCreateInput[] = [
   { name: 'Classic T-Shirt', size: 'M', id: 'c1a9d6a2-1f3b-4a8e-9c2e-1b7f2d6a0a11', description: 'Soft cotton everyday t-shirt' },
   { name: 'Running Shoes', size: '42', id: 'd2b7f3c4-5a6d-4b9a-8e1c-2c8f3e7b1b22', description: 'Lightweight running shoes' },
   { name: 'Denim Jacket', size: 'L', id: 'e3c8a1b5-6d7e-4c2b-9f3a-3d9e4f8c2c33', description: 'Stylish blue denim jacket' },
@@ -56,4 +56,33 @@ export const productsData: ProductDTO[] = [
   { name: 'Scarf', size: '180cm', id: '37b2b4ce-f809-4b56-41b6-046b21711820', description: 'Soft wool scarf' },
   { name: 'Slippers', size: '43', id: '48c3c5df-091a-4c67-52c7-157c32822931', description: 'Comfortable indoor slippers' },
   { name: 'Rain Jacket', size: 'XL', id: '59d4d6e0-1a2b-4d78-63d8-268d43933a42', description: 'Waterproof lightweight jacket' },
+];
+
+export const userData: UserCreateManyInput[] = [
+  { id: '9aaca58e-4ea2-4008-bfc7-2007cd91c0f1', email: 'test@test.example', name: 'Test', password: '123456' },
+];
+
+export const ordersData: OrderCreateManyInput[] = [
+  { id: '444e352e-acb2-46bd-a8d3-13f48379d4fe', userId: userData.find(user => user.email === 'test@test.example')!.id! },
+];
+
+export const ordersItemData: OrderItemCreateManyInput[] = [
+  {
+    id: '8e4d87e8-8df6-45dc-9f0a-b379550abddf',
+    orderId: ordersData[0].id!,
+    name: 'Rain Jacket',
+    size: 'XL',
+    productId: '59d4d6e0-1a2b-4d78-63d8-268d43933a42',
+    description: 'Waterprof lightweight jacket',
+    quantity: 2,
+  },
+  {
+    id: 'c4745c57-7315-448f-adbf-c9979a8c8b6f',
+    orderId: ordersData[0].id!,
+    productId: '26a1a3bd-e7f8-4a45-30a5-f36a1061070f',
+    name: 'Gloves',
+    size: 'M',
+    description: 'Winter insulated gloves',
+    quantity: 2,
+  },
 ];
