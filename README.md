@@ -16,9 +16,9 @@ npm run prisma:reset    # reset and reseed the db for dev before starting the de
 npm run start:dev
 ```
 
-# Entity Relation Diagram
+## Entity Relationship Diagram
 
-To see the diagram download the extension bierner.markdown-mermaid in vscode
+To view the diagram, install the `bierner.markdown-mermaid` extension in VS Code.
 
 ```mermaid
 erDiagram
