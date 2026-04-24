@@ -1,46 +1,51 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { Order, OrderItem } from '../../generated/prisma/client';
+import { OrderDto } from './dto/order.dto';
 
 @Injectable()
 export class OrderService {
   constructor(private readonly prisma: PrismaService) {}
-  async createOrder(
-    userId: string,
-    productItems: {
-      productId: string;
-      quantity: number;
-      size?: string | null;
-      name: string;
-      description?: string | null;
-    }[],
-  ): Promise<{ order: Order; orderItems: OrderItem[] }> {
+
+  async create(orderInput: OrderDto): Promise<{ order: Order; orderItems: OrderItem[] }> {
+    const productIds = [...new Set(orderInput.items.map(item => item.productId))];
+
     return this.prisma.$transaction(async tx => {
       const order = await tx.order.create({
         data: {
-          userId,
-          status: 'PENDING',
+          userId: orderInput.userId,
         },
       });
 
+      const products = await tx.product.findMany({
+        where: {
+          id: {
+            in: productIds,
+          },
+        },
+      });
+
+      if (products.length !== productIds.length) {
+        throw new BadRequestException('One or more products were not found.');
+      }
+
+      const productById = new Map(products.map(product => [product.id, product]));
       const orderItems = await Promise.all(
-        productItems.map(async item => {
-          const product = await tx.product.findUnique({
-            where: { id: item.productId },
-          });
+        orderInput.items.map(item => {
+          const product = productById.get(item.productId);
 
           if (!product) {
-            throw new Error(`Product not found: ${item.productId}`);
+            throw new BadRequestException(`Product not found: ${item.productId}`);
           }
 
           return tx.orderItem.create({
             data: {
               orderId: order.id,
-              productId: item.productId,
+              productId: product.id,
+              name: product.name,
+              size: product.size,
+              description: product.description,
               quantity: item.quantity,
-              name: item.name,
-              size: item.size,
-              description: item.description,
             },
           });
         }),
