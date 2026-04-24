@@ -1,24 +1,54 @@
 generator client {
-  provider = "prisma-client"
-  output = "../src/generated/prisma"
-   moduleFormat = "cjs"
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  moduleFormat = "cjs"
 }
 
 datasource db {
   provider = "postgresql"
-}   
+}
 
 model User {
-  id        String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name      String
   email     String   @unique
-  password  String  
-  createdAt DateTime  @default(now()) @db.Timestamptz(6)
+  password  String
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  orders    Order[]
 }
 
 model Product {
-  id        String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name   String    
-  size   String?
-  description   String?
-  createdAt DateTime  @default(now()) @db.Timestamptz(6)
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+
+  name        String
+  size        String?
+  description String?
+
+  orderItems OrderItem[]
+}
+
+model Order {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+
+  userId String @db.Uuid
+  user   User   @relation(fields: [userId], references: [id])
+
+  orderItems OrderItem[]
+}
+
+model OrderItem {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+
+  name        String
+  size        String?
+  description String?
+  quantity    Int
+
+  orderId String @db.Uuid
+  order   Order  @relation(fields: [orderId], references: [id])
+
+  productId String  @db.Uuid
+  product   Product @relation(fields: [productId], references: [id])
 }
