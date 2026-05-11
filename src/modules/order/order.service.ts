@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { Order, OrderItem } from '../../generated/prisma/client';
 import { OrderDto } from './dto/order.dto';
@@ -8,7 +8,7 @@ export class OrderService {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(orderInput: OrderDto): Promise<{ order: Order; orderItems: OrderItem[] }> {
-    const productIds = [...new Set(orderInput.items.map(item => item.productId))];
+    const productIds = orderInput.items.map(item => item.productId);
 
     return this.prisma.$transaction(async tx => {
       const order = await tx.order.create({
@@ -35,7 +35,7 @@ export class OrderService {
           const product = productById.get(item.productId);
 
           if (!product) {
-            throw new BadRequestException(`Product not found: ${item.productId}`);
+            throw new NotFoundException(`Product not found: ${item.productId}`);
           }
 
           return tx.orderItem.create({
