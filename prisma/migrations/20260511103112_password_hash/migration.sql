@@ -7,7 +7,9 @@
 */
 -- AlterTable
 ALTER TABLE "User" 
-ADD COLUMN     "passwordHash" TEXT NOT NULL;
+  ADD COLUMN     "passwordHash" TEXT NOT NULL;
+
 UPDATE "User" SET "password" = "passwordHash";
-DROP COLUMN "password",
+
+DROP COLUMN "password";
 
