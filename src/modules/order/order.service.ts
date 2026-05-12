@@ -1,13 +1,13 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { Order, OrderItem } from '../../generated/prisma/client';
-import { OrderDto } from './dto/order.dto';
+import { CreateOrderDTO } from './dto/create-order/create-order.dto';
 
 @Injectable()
 export class OrderService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async create(orderInput: OrderDto): Promise<{ order: Order; orderItems: OrderItem[] }> {
+  async create(orderInput: CreateOrderDTO): Promise<{ order: Order; orderItems: OrderItem[] }> {
     const productIds = orderInput.items.map(item => item.productId);
 
     return this.prisma.$transaction(async tx => {
@@ -30,26 +30,26 @@ export class OrderService {
       }
 
       const productById = new Map(products.map(product => [product.id, product]));
-      const orderItems = await Promise.all(
-        orderInput.items.map(item => {
-          const product = productById.get(item.productId);
+      const orderItemsData = orderInput.items.map(item => {
+        const product = productById.get(item.productId);
 
-          if (!product) {
-            throw new NotFoundException(`Product not found: ${item.productId}`);
-          }
+        if (!product) {
+          throw new NotFoundException(`Product not found: ${item.productId}`);
+        }
 
-          return tx.orderItem.create({
-            data: {
-              orderId: order.id,
-              productId: product.id,
-              name: product.name,
-              size: product.size,
-              description: product.description,
-              quantity: item.quantity,
-            },
-          });
-        }),
-      );
+        return {
+          orderId: order.id,
+          productId: product.id,
+          name: product.name,
+          size: product.size,
+          description: product.description,
+          quantity: item.quantity,
+        };
+      });
+
+      const orderItems = await tx.orderItem.createManyAndReturn({
+        data: orderItemsData,
+      });
 
       return { order, orderItems };
     });

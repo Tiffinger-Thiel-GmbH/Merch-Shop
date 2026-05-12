@@ -53,7 +53,7 @@ export const productsData: ProductCreateInput[] = [
 ];
 
 export const userData: UserCreateManyInput[] = [
-  { id: '9aaca58e-4ea2-4008-bfc7-2007cd91c0f1', email: 'test@test.example', name: 'Test', password: '123456' },
+  { id: '9aaca58e-4ea2-4008-bfc7-2007cd91c0f1', email: 'test@test.example', name: 'Test', passwordHash: '123456' },
 ];
 
 export const ordersData: OrderCreateManyInput[] = [

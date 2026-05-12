@@ -1,14 +1,16 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import { OrderService } from './order.service';
-import { OrderDto } from './dto/order.dto';
-import { Order, OrderItem } from '../../generated/prisma/client';
+import { CreateOrderDTO } from './dto/create-order/create-order.dto';
+import { OrderDTO } from './dto/order/order.dto';
+import { toOrderDTO } from './dto/to-order/to-order-dto.mapper';
 
 @Controller('orders')
 export class OrderController {
   constructor(private readonly orderService: OrderService) {}
 
   @Post()
-  create(@Body() createOrderDto: OrderDto): Promise<{ order: Order; orderItems: OrderItem[] }> {
-    return this.orderService.create(createOrderDto);
+  async create(@Body() createOrderDto: CreateOrderDTO): Promise<OrderDTO> {
+    const newOrder = await this.orderService.create(createOrderDto);
+    return toOrderDTO(newOrder);
   }
 }
