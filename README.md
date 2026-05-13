@@ -25,7 +25,9 @@ erDiagram
     direction RL
     User ||--o{ ORDER : creates
     ORDER ||--}| ORDER_ITEM : contains
-    PRODUCT ||--o{ ORDER_ITEM  : reference
+    PRODUCT ||--o{ PRODUCT_VARIANT  : contains
+    PRODUCT_VARIANT ||--o{ ORDER_ITEM_Variant : refences
+    ORDER_ITEM_Variant ||--o{ ORDER_ITEM : contains
     User {
         string id PK "UUID"
         string name
@@ -54,5 +56,21 @@ erDiagram
         string size  "size from PRODUCT | nullable"
         string description "description from PRODUCT | nullable"
         int quantity
+    }
+    PRODUCT_VARIANT {
+        string id PK "UUID"
+        string productId FK "UUID"
+        string category "Grösse, Typ etc."
+        string name
+        string description
+        date createdAt "Timestamp w Z"
+    }
+    ORDER_ITEM_Variant {
+        string id PK "UUID"
+        string orderItemId FK "UUID"
+        string productVariantId FK "UUID"
+        string category
+        string variantName
+        string variantDescription
     }
 ```
