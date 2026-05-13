@@ -22,12 +22,13 @@ To view the diagram, install the `bierner.markdown-mermaid` extension in VS Code
 
 ```mermaid
 erDiagram
-    direction LR
+    direction TB
     User 1 to many ORDER : creates
     ORDER 1 to one or many ORDER_ITEM : contains
     PRODUCT 1 to zero or many PRODUCT_VARIANT  : contains
     PRODUCT_VARIANT 1 to 1 ORDER_ITEM_VARIANT : refences
     ORDER_ITEM_VARIANT zero or many to 1 ORDER_ITEM : contains
+    ORDER_ITEM 1 to many PRODUCT: contains
     User {
         string id PK "UUID"
         string name
