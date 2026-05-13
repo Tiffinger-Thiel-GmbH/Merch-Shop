@@ -22,12 +22,12 @@ To view the diagram, install the `bierner.markdown-mermaid` extension in VS Code
 
 ```mermaid
 erDiagram
-    direction RL
-    User ||--o{ ORDER : creates
-    ORDER ||--}| ORDER_ITEM : contains
-    PRODUCT ||--o{ PRODUCT_VARIANT  : contains
-    PRODUCT_VARIANT ||--o{ ORDER_ITEM_Variant : refences
-    ORDER_ITEM_Variant ||--o{ ORDER_ITEM : contains
+    direction LR
+    User 1 to many ORDER : creates
+    ORDER 1 to one or many ORDER_ITEM : contains
+    PRODUCT 1 to zero or many PRODUCT_VARIANT  : contains
+    PRODUCT_VARIANT 1 to 1 ORDER_ITEM_VARIANT : refences
+    ORDER_ITEM_VARIANT zero or many to 1 ORDER_ITEM : contains
     User {
         string id PK "UUID"
         string name
@@ -44,7 +44,6 @@ erDiagram
     PRODUCT {
         string id PK "UUID"
         string name
-        string size "nullable"
         string description "nullable"
         date   createdAt "Timestamp w Zone"
     }
@@ -53,7 +52,6 @@ erDiagram
         string idProduct FK "UUID from PRODUCT"
         string idOrder FK "UUID from ORDER"
         string name  "name from PRODUCT"
-        string size  "size from PRODUCT | nullable"
         string description "description from PRODUCT | nullable"
         int quantity
     }
@@ -65,12 +63,12 @@ erDiagram
         string description
         date createdAt "Timestamp w Z"
     }
-    ORDER_ITEM_Variant {
+    ORDER_ITEM_VARIANT {
         string id PK "UUID"
         string orderItemId FK "UUID"
         string productVariantId FK "UUID"
         string category
-        string variantName
-        string variantDescription
+        string name
+        string description
     }
 ```
