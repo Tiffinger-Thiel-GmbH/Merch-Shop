@@ -41,7 +41,6 @@ export class OrderService {
           orderId: order.id,
           productId: product.id,
           name: product.name,
-          size: product.size,
           description: product.description,
           quantity: item.quantity,
         };

@@ -4,8 +4,7 @@ import { ProductVariantCategoryController } from './product-variant-category.con
 import { PrismaService } from '../../prisma/prisma.service';
 
 @Module({
-  imports: [PrismaService],
   controllers: [ProductVariantCategoryController],
-  providers: [ProductVariantCategoryService],
+  providers: [ProductVariantCategoryService, PrismaService],
 })
 export class ProductVariantCategoryModule {}

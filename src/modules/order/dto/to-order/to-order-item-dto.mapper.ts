@@ -8,6 +8,5 @@ export function toOrderItemDTO(orderItem: OrderItem): OrderItemDTO {
     productId: orderItem.productId,
     name: orderItem.name,
     quantity: orderItem.quantity,
-    size: orderItem.size || undefined,
   };
 }
