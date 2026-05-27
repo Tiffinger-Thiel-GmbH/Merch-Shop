@@ -1,19 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
+import { ProductVariantOutgoingDTO } from './dto/product-variant-outgoing.dto';
 
 @Injectable()
 export class ProductVariantService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async findVariantsByProductId(productId: string): Promise<{ variant: string[] }> {
-    const variants = await this.prisma.productVariant.findMany({
+  public async findVariantsByProductId(productId: string): Promise<ProductVariantOutgoingDTO[]> {
+    return await this.prisma.productVariant.findMany({
       where: { productId },
-      select: { category: true, name: true },
-      distinct: ['category', 'name'],
+      select: {
+        category: true,
+        name: true,
+      },
+      orderBy: [{ category: 'asc' }, { name: 'asc' }, { id: 'asc' }],
     });
-    console.log(variants);
-
-    const variant = variants.map(v => v.category).filter(Boolean);
-    return { variant };
   }
 }
