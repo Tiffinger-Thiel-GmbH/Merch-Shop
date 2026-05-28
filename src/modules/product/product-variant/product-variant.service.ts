@@ -6,9 +6,12 @@ import { ProductVariantOutgoingDTO } from './dto/product-variant-outgoing.dto';
 export class ProductVariantService {
   constructor(private readonly prisma: PrismaService) {}
 
-  public async findVariantsByProductId(productId: string): Promise<ProductVariantOutgoingDTO[]> {
+  public async findVariantsByProductId(productId: string, category?: string): Promise<ProductVariantOutgoingDTO[]> {
     return await this.prisma.productVariant.findMany({
-      where: { productId },
+      where: {
+        productId,
+        category,
+      },
       select: {
         category: true,
         name: true,

@@ -1,4 +1,8 @@
+import { IsString } from 'class-validator';
+
 export class ProductVariantOutgoingDTO {
-  category!: string;
+  @IsString()
+  category!: string | undefined;
+  @IsString()
   name!: string;
 }
