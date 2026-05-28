@@ -11,7 +11,6 @@ export class ProductVariantCategoryService {
       select: { category: true },
       distinct: ['category'],
     });
-    console.log(variants);
 
     const categories = variants.map(v => v.category).filter(Boolean);
     return { categories };
