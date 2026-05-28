@@ -4,7 +4,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PrismaModule } from './modules/prisma/prisma.module';
 import { ProductModule } from './modules/product/products/product.module';
-import { OrderModule } from './modules/order/order.module';
+import { OrderModule } from './modules/order/dto/order.module';
 import { ProductVariantCategoryModule } from './modules/product/product-variant-category/product-variant-category.module';
 import { ProductVariantModule } from './modules/product/product-variant/product-variant.module';
 
