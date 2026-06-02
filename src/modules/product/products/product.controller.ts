@@ -3,7 +3,7 @@ import { ProductService } from './product.service';
 import { ProductListDTO } from './dtos/product-list.dto';
 import { mapProductDTO } from './mappings/product-dto.mapper';
 
-@Controller('products')
+@Controller('products/{id}')
 export class ProductsController {
   constructor(private readonly productsService: ProductService) {}
 

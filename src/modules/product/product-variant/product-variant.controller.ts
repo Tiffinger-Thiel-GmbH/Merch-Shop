@@ -10,7 +10,7 @@ import { ProductVariantListDTO } from './dto/product-variant-list.dto';
 export class ProductVariantController {
   constructor(private readonly productVariantService: ProductVariantService) {}
 
-  @Get('/variants')
+  @Get('/variants/{id}')
   @ApiQuery({
     name: 'productId',
     required: true,
