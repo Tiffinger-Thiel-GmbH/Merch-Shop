@@ -42,6 +42,7 @@ export class OrderService {
 
       for (const item of orderInput.items) {
         const product = productById.get(item.productId);
+        console.log('🚀 ~ OrderService ~ create ~ product:', product);
 
         if (!product) {
           throw new NotFoundException(`Product not found: ${item.productId}`);
@@ -55,12 +56,36 @@ export class OrderService {
             description: product.description,
             quantity: item.quantity,
           },
-          include: {
-            orderItemVariant: true,
-          },
         });
 
-        orderItems.push(orderItem);
+        const orderItemVariants = await Promise.all(
+          product.productVariants
+            .filter(variant => {
+              const orderThisVariant = item.productVariantId.includes(variant.id);
+              return orderThisVariant;
+            })
+            .map(variant =>
+              tx.orderItemVariant
+                .create({
+                  data: {
+                    orderItemId: orderItem.id,
+                    productVariantId: variant.id,
+                    name: variant.name,
+                    description: variant.description,
+                    category: variant.category,
+                  },
+                })
+                .catch(error => {
+                  console.error('Error creating variant:', error);
+                  throw error;
+                }),
+            ),
+        );
+
+        orderItems.push({
+          ...orderItem,
+          orderItemVariant: orderItemVariants,
+        });
       }
 
       return { order, orderItems };
