@@ -42,7 +42,6 @@ export class OrderService {
 
       for (const item of orderInput.items) {
         const product = productById.get(item.productId);
-        console.log('🚀 ~ OrderService ~ create ~ product:', product);
 
         if (!product) {
           throw new NotFoundException(`Product not found: ${item.productId}`);
