@@ -11,10 +11,9 @@ export class ProductVariantCategoryService {
       where: { productId },
       select: { category: true },
       distinct: ['category'],
-      orderBy: { category: 'asc' },
     });
 
-    const categories = variants.map(v => v.category);
+    const categories = variants.map(v => v.category).filter(Boolean);
     return { categories };
   }
 }

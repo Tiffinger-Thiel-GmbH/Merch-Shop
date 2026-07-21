@@ -1,12 +1,16 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { Logger, ValidationPipe } from '@nestjs/common';
+import { AppModule } from './app.module';
 
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
 
-  const config = new DocumentBuilder().setTitle('API Title').setDescription('API Beschreibung').setVersion('1.0').build();
+  const config = new DocumentBuilder()
+    .setTitle('Merch Shop Products & Orders')
+    .setDescription('A full list of all routes for the T&T Merch Shop')
+    .setVersion('1.0')
+    .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
   app.useGlobalPipes(

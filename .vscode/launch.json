@@ -1,0 +1,15 @@
+{
+  "configurations": [
+    {
+      "type": "node",
+      "request": "attach",
+      "name": "Attach to Node.js",
+      "address": "localhost",
+      "port": 9229,
+      "localRoot": "${workspaceFolder}",
+      "remoteRoot": "/home/connor_mcswain/Projekte/Merch-Shop",
+      "sourceMaps": true,
+      "skipFiles": ["<node_internals>/**"]
+    }
+  ]
+}
