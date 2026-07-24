@@ -1,8 +1,12 @@
-import { Order, OrderItem } from '../../../../generated/prisma/client';
+import { Order, OrderItem, OrderItemVariant } from '../../../../generated/prisma/client';
 import { OrderDTO } from '../order/order.dto';
 import { toOrderItemDTO } from './to-order-item-dto.mapper';
 
-export function toOrderDTO(value: { order: Order; orderItems: OrderItem[] }): OrderDTO {
+type OrderItemWithVariants = OrderItem & {
+  orderItemVariant: OrderItemVariant[];
+};
+
+export function toOrderDTO(value: { order: Order; orderItems: OrderItemWithVariants[] }): OrderDTO {
   return {
     id: value.order.id,
     items: value.orderItems.map(toOrderItemDTO),

@@ -1,15 +1,23 @@
-import { IsNotEmpty, IsNumber, IsUUID, Min } from 'class-validator';
+import { ArrayMinSize, IsArray, IsNotEmpty, IsNumber, IsUUID, Min } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateOrderItemDTO {
   @IsUUID()
   @IsNotEmpty()
   @ApiProperty({
-    example: '875d7ceb-aca6-481c-9a30-cdcdf7e5a042',
+    example: '11111111-1111-4111-8111-111111111111',
   })
   productId!: string;
 
   @IsNumber()
   @Min(1)
   quantity!: number;
+
+  @IsArray()
+  @ArrayMinSize(1)
+  @IsUUID('all', { each: true })
+  @ApiProperty({
+    example: ['10000000-0000-4000-8000-000000000001', '10000000-0000-4000-8000-000000000002'],
+  })
+  productVariantId!: string[];
 }

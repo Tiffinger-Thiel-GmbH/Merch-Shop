@@ -22,10 +22,11 @@ model Product {
   createdAt DateTime @default(now()) @db.Timestamptz(6)
 
   name        String
-  size        String?
   description String?
 
   orderItems OrderItem[]
+
+  productVariants ProductVariant[]
 }
 
 model Order {
@@ -42,7 +43,6 @@ model OrderItem {
   id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
 
   name        String
-  size        String?
   description String?
   quantity    Int
 
@@ -51,4 +51,35 @@ model OrderItem {
 
   productId String  @db.Uuid
   product   Product @relation(fields: [productId], references: [id])
+
+  orderItemVariant OrderItemVariant[]
+}
+
+model ProductVariant {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  
+  category String
+  name String
+  description String
+
+  productId String  @db.Uuid
+  product Product @relation(fields: [productId], references: [id])
+
+  orderItemVariant OrderItemVariant[]
+
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+}
+
+model OrderItemVariant {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+
+  category String
+  name String
+  description String
+
+  productVariantId String @db.Uuid
+  productVariant ProductVariant @relation(fields: [productVariantId], references: [id])
+
+  orderItemId String @db.Uuid
+  orderItem OrderItem @relation(fields: [orderItemId], references: [id])
 }
