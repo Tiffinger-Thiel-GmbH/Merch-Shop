@@ -1,21 +1,57 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ProductsController } from './product.controller';
 import { ProductService } from './product.service';
-import { PrismaService } from '../../prisma/prisma.service';
 
 describe('ProductsController', () => {
   let controller: ProductsController;
 
+  const mockProductService = {
+    findAll: jest.fn(),
+  };
+
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [ProductsController],
-      providers: [ProductService, PrismaService],
+      providers: [{ provide: ProductService, useValue: mockProductService }],
     }).compile();
 
     controller = module.get<ProductsController>(ProductsController);
   });
 
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('should be defined', () => {
     expect(controller).toBeDefined();
+  });
+
+  describe('findAll', () => {
+    it('should return items and totalCount mapped from the service result', async () => {
+      const fakeProducts = [
+        { id: 'prod-1', name: 'T-Shirt', description: 'A shirt', createdAt: new Date() },
+        { id: 'prod-2', name: 'Hat', description: null, createdAt: new Date() },
+      ];
+      mockProductService.findAll.mockResolvedValue(fakeProducts);
+
+      const result = await controller.findAll();
+
+      expect(result).toEqual({
+        items: [
+          { id: 'prod-1', name: 'T-Shirt', description: 'A shirt' },
+          { id: 'prod-2', name: 'Hat', description: null },
+        ],
+        totalCount: 2,
+      });
+      expect(mockProductService.findAll).toHaveBeenCalledTimes(1);
+    });
+
+    it('should return totalCount 0 and an empty items array when there are no products', async () => {
+      mockProductService.findAll.mockResolvedValue([]);
+
+      const result = await controller.findAll();
+
+      expect(result).toEqual({ items: [], totalCount: 0 });
+    });
   });
 });
