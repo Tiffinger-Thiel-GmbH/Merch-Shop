@@ -1,13 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ProductService } from './product.service';
 import { PrismaService } from '../../prisma/prisma.service';
+import { Product } from '../../../generated/prisma/client';
+import { ProductCreateArgs } from '../../../generated/prisma/models';
 
 describe('ProductService', () => {
   let service: ProductService;
 
   const mockPrismaService = {
     product: {
-      findMany: jest.fn(),
+      findMany: jest.fn<PromiseLike<Product[]>, [ProductCreateArgs]>(),
     },
   };
 
@@ -29,7 +31,7 @@ describe('ProductService', () => {
 
   describe('findAll', () => {
     it('should return all products from prisma', async () => {
-      const fakeProducts = [
+      const fakeProducts: Product[] = [
         { id: 'prod-1', name: 'T-Shirt', description: 'A shirt', createdAt: new Date() },
         { id: 'prod-2', name: 'Hat', description: null, createdAt: new Date() },
       ];

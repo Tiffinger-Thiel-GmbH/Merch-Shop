@@ -3,12 +3,13 @@ import { ProductVariantController } from './product-variant.controller';
 import { ProductVariantService } from './product-variant.service';
 import { ProductIdDTO } from './dto/product-id.dto';
 import { ProductVariantIncomingDTO } from './dto/product-variant-incoming.dto';
+import { ProductVariant } from '../../../generated/prisma/client';
 
 describe('ProductVariantController', () => {
   let controller: ProductVariantController;
 
   const mockProductVariantService = {
-    findVariantsByProductId: jest.fn(),
+    findVariantsByProductId: jest.fn<PromiseLike<ProductVariant[]>, [string, string?]>(),
   };
 
   beforeEach(async () => {

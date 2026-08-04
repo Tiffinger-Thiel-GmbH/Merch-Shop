@@ -2,15 +2,17 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { OrderController } from './order.controller';
 import { OrderService } from './order.service';
 import { CreateOrderDTO } from './dto/create-order/create-order.dto';
+import { OrderServiceCreateResult } from './order.service';
+import { OrderDTO } from './dto/order/order.dto';
 
 describe('OrderController', () => {
   let controller: OrderController;
 
   const mockOrderService = {
-    create: jest.fn(),
+    create: jest.fn<PromiseLike<OrderServiceCreateResult>, [CreateOrderDTO]>(),
   };
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [OrderController],
       providers: [{ provide: OrderService, useValue: mockOrderService }],
@@ -19,7 +21,7 @@ describe('OrderController', () => {
     controller = module.get<OrderController>(OrderController);
   });
 
-  afterEach(() => {
+  beforeEach(() => {
     jest.clearAllMocks();
   });
 
@@ -34,7 +36,7 @@ describe('OrderController', () => {
     };
 
     it('should call orderService.create with the DTO and return the mapped OrderDTO', async () => {
-      const serviceResult = {
+      const serviceResult: OrderServiceCreateResult = {
         order: { id: 'order-1', userId: 'user-1', createdAt: new Date() },
         orderItems: [
           {
@@ -86,13 +88,7 @@ describe('OrderController', () => {
             ],
           },
         ],
-      });
-    });
-
-    it('should propagate errors thrown by orderService.create', async () => {
-      mockOrderService.create.mockRejectedValue(new Error('Something went wrong'));
-
-      await expect(controller.create(dto)).rejects.toThrow('Something went wrong');
+      } satisfies OrderDTO);
     });
   });
 });

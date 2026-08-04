@@ -1,12 +1,14 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ProductsController } from './product.controller';
 import { ProductService } from './product.service';
+import { Product } from '../../../generated/prisma/client';
+import { ProductListDTO } from './dtos/product-list.dto';
 
 describe('ProductsController', () => {
   let controller: ProductsController;
 
   const mockProductService = {
-    findAll: jest.fn(),
+    findAll: jest.fn<PromiseLike<Product[]>, []>(),
   };
 
   beforeEach(async () => {
@@ -28,7 +30,7 @@ describe('ProductsController', () => {
 
   describe('findAll', () => {
     it('should return items and totalCount mapped from the service result', async () => {
-      const fakeProducts = [
+      const fakeProducts: Product[] = [
         { id: 'prod-1', name: 'T-Shirt', description: 'A shirt', createdAt: new Date() },
         { id: 'prod-2', name: 'Hat', description: null, createdAt: new Date() },
       ];
@@ -42,7 +44,7 @@ describe('ProductsController', () => {
           { id: 'prod-2', name: 'Hat', description: null },
         ],
         totalCount: 2,
-      });
+      } satisfies ProductListDTO);
       expect(mockProductService.findAll).toHaveBeenCalledTimes(1);
     });
 

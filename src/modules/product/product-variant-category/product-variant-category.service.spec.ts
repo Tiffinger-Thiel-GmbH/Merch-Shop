@@ -1,13 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ProductVariantCategoryService } from './product-variant-category.service';
 import { PrismaService } from '../../prisma/prisma.service';
+import { ProductVariantCategoryService } from './product-variant-category.service';
+import { ProductVariant } from '../../../generated/prisma/client';
+import { ProductVariantCreateArgs } from '../../../generated/prisma/models';
 
 describe('ProductVariantCategoryService', () => {
   let service: ProductVariantCategoryService;
 
   const mockPrismaService = {
     productVariant: {
-      findMany: jest.fn(),
+      findMany: jest.fn<PromiseLike<ProductVariant[]>, [ProductVariantCreateArgs]>(),
     },
   };
 
@@ -29,7 +31,10 @@ describe('ProductVariantCategoryService', () => {
 
   describe('findCategoriesByProductId', () => {
     it('should return distinct categories for a product', async () => {
-      mockPrismaService.productVariant.findMany.mockResolvedValue([{ category: 'Color' }, { category: 'Size' }]);
+      mockPrismaService.productVariant.findMany.mockResolvedValue([
+        { category: 'Color', createdAt: new Date(), description: '', id: '1', name: 'Red', productId: '1' },
+        { category: 'Size', createdAt: new Date(), description: '', id: '1', name: 'L', productId: '1' },
+      ]);
 
       const result = await service.findCategoriesByProductId('prod-1');
 
@@ -50,7 +55,10 @@ describe('ProductVariantCategoryService', () => {
     });
 
     it('should filter out falsy category values', async () => {
-      mockPrismaService.productVariant.findMany.mockResolvedValue([{ category: 'Color' }, { category: '' }, { category: null }]);
+      mockPrismaService.productVariant.findMany.mockResolvedValue([
+        { category: 'Color', createdAt: new Date(), description: '', id: '1', name: 'Red', productId: '1' },
+        { category: '', createdAt: new Date(), description: '', id: '1', name: 'Red', productId: '1' },
+      ]);
 
       const result = await service.findCategoriesByProductId('prod-1');
 

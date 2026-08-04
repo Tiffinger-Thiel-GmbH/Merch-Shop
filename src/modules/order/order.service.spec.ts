@@ -5,21 +5,26 @@ import { PrismaService } from '../prisma/prisma.service';
 import { CreateOrderDTO } from './dto/create-order/create-order.dto';
 import { CreateOrderItemDTO } from './dto/create-order/create-order-item.dto';
 
+import { Order, OrderItem, OrderItemVariant, Product, ProductVariant } from '../../generated/prisma/client';
+import { OrderCreateArgs, OrderItemCreateArgs, OrderItemVariantCreateArgs, ProductCreateArgs } from '../../generated/prisma/models';
+
+export type ProductWithVariants = Product & { productVariants: ProductVariant[] };
+
 describe('OrderService', () => {
   let orderService: OrderService;
 
   const mockTx = {
     order: {
-      create: jest.fn(),
+      create: jest.fn<PromiseLike<Order>, [OrderCreateArgs]>(),
     },
     product: {
-      findMany: jest.fn(),
+      findMany: jest.fn<PromiseLike<ProductWithVariants[]>, [ProductCreateArgs]>(),
     },
     orderItem: {
-      create: jest.fn(),
+      create: jest.fn<PromiseLike<OrderItem>, [OrderItemCreateArgs]>(),
     },
     orderItemVariant: {
-      create: jest.fn(),
+      create: jest.fn<PromiseLike<OrderItemVariant>, [OrderItemVariantCreateArgs]>(),
     },
   };
 
@@ -27,7 +32,7 @@ describe('OrderService', () => {
     $transaction: jest.fn((callback: (tx: typeof mockTx) => unknown) => callback(mockTx)),
   };
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [OrderService, { provide: PrismaService, useValue: mockPrismaService }],
     }).compile();
@@ -134,7 +139,7 @@ describe('OrderService', () => {
     it('should support multiple items and multiple variants per item', async () => {
       const dto = buildCreateOrderDTO({
         items: [
-          buildOrderItemDTO({ productId: 'prod-1', productVariantId: ['variant-1', 'variant-2'] }),
+          buildOrderItemDTO({ productId: 'prod-1', productVariantId: ['prod-1-variant-1', 'prod-1-variant-2'] }),
           buildOrderItemDTO({ productId: 'prod-2', quantity: 1, productVariantId: [] }),
         ],
       });
@@ -148,8 +153,8 @@ describe('OrderService', () => {
           description: null,
           createdAt: new Date(),
           productVariants: [
-            { id: 'variant-1', category: 'size', name: 'M', description: 'Medium', productId: 'prod-1', createdAt: new Date() },
-            { id: 'variant-2', category: 'color', name: 'Red', description: 'Red', productId: 'prod-1', createdAt: new Date() },
+            { id: 'prod-1-variant-1', category: 'size', name: 'M', description: 'Medium', productId: 'prod-1', createdAt: new Date() },
+            { id: 'prod-1-variant-2', category: 'color', name: 'Red', description: 'Red', productId: 'prod-1', createdAt: new Date() },
           ],
         },
         {
@@ -163,15 +168,59 @@ describe('OrderService', () => {
       mockTx.product.findMany.mockResolvedValue(fakeProducts);
 
       mockTx.orderItem.create
-        .mockResolvedValueOnce({ id: 'item-1', orderId: 'order-1', productId: 'prod-1', name: 'T-Shirt', description: null, quantity: 2 })
-        .mockResolvedValueOnce({ id: 'item-2', orderId: 'order-1', productId: 'prod-2', name: 'Hat', description: null, quantity: 1 });
+        .mockResolvedValueOnce({
+          id: 'order-1-item-1',
+          orderId: 'order-1',
+          productId: 'prod-1',
+          name: 'T-Shirt',
+          description: null,
+          quantity: 2,
+        })
+        .mockResolvedValueOnce({
+          id: 'order-1-item-2',
+          orderId: 'order-1',
+          productId: 'prod-2',
+          name: 'Hat',
+          description: null,
+          quantity: 1,
+        });
 
-      mockTx.orderItemVariant.create.mockResolvedValue({});
+      const product1orderItemVariants: OrderItemVariant[] = [
+        {
+          id: 'ordered-variant-1',
+          category: 'size',
+          name: 'M',
+          description: 'Medium',
+          productVariantId: 'prod-1-variant-1',
+          orderItemId: 'order-1-item-1',
+        },
+        {
+          id: 'ordered-variant-2',
+          category: 'color',
+          name: 'Red',
+          description: 'Red',
+          productVariantId: 'prod-1-variant-2',
+          orderItemId: 'prod-1-item-1',
+        },
+      ];
+      mockTx.orderItemVariant.create.mockImplementation(createOrderVariant => {
+        const createArgs = createOrderVariant.data;
+        const createdVariant = product1orderItemVariants.find(
+          variant => variant.productVariantId === createArgs.productVariantId && variant.orderItemId === createArgs.orderItemId,
+        );
+        if (createdVariant === undefined) {
+          throw new Error(
+            `Variant not in prepared array (Created ${createOrderVariant.data.productVariantId} on ${createOrderVariant.data.orderItemId})`,
+          );
+        }
+        return Promise.resolve(createdVariant);
+      });
 
       const result = await orderService.create(dto);
 
       expect(result.orderItems).toHaveLength(2);
       expect(mockTx.orderItemVariant.create).toHaveBeenCalledTimes(2);
+      expect(result.orderItems[0].orderItemVariant).toEqual(product1orderItemVariants);
       expect(result.orderItems[1].orderItemVariant).toEqual([]);
     });
 
@@ -232,6 +281,7 @@ describe('OrderService', () => {
         createdAt: new Date(),
         productVariants: [
           { id: 'variant-1', category: 'size', name: 'M', description: 'Medium', productId: 'prod-1', createdAt: new Date() },
+          { id: 'variant-1', category: 'size', name: 'M', description: 'Medium', productId: 'prod-2', createdAt: new Date() },
         ],
       };
       mockTx.product.findMany.mockResolvedValue([fakeProduct]);
@@ -259,7 +309,9 @@ describe('OrderService', () => {
       mockTx.product.findMany.mockResolvedValue([
         { id: 'prod-1', name: 'T-Shirt', description: null, createdAt: new Date(), productVariants: [] },
       ]);
-      mockTx.orderItem.create.mockResolvedValue({});
+
+      // wir betrachte hier die order items nicht, die Werte sind also egal
+      mockTx.orderItem.create.mockResolvedValue(undefined as unknown as OrderItem);
 
       await orderService.create(dto);
 

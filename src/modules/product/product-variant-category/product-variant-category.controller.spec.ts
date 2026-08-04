@@ -1,12 +1,13 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ProductVariantCategoryController } from './product-variant-category.controller';
 import { ProductVariantCategoryService } from './product-variant-category.service';
+import { ProductVariantCategoriesDTO } from './dto/product-variant-categories.dto';
 
 describe('ProductVariantCategoryController', () => {
   let controller: ProductVariantCategoryController;
 
   const mockProductVariantCategoryService = {
-    findCategoriesByProductId: jest.fn(),
+    findCategoriesByProductId: jest.fn<PromiseLike<ProductVariantCategoriesDTO>, []>(),
   };
 
   beforeEach(async () => {
