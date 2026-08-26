@@ -29,12 +29,9 @@
     "@nestjs/swagger": "^11.3.0",
     "@prisma/adapter-pg": "^7.7.0",
     "@prisma/client": "^7.7.0",
-<<<<<<< HEAD
-=======
     "class-transformer": "^0.5.1",
     "class-validator": "^0.15.1",
     "nodemailer": "^9.0.5",
->>>>>>> 384dcba (email versand und action link)
     "pg": "^8.20.0",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
