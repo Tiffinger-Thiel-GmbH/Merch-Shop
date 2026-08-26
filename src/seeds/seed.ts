@@ -3,7 +3,7 @@ import 'dotenv/config';
 import { Pool } from 'pg';
 import { PrismaPg } from '@prisma/adapter-pg';
 import { PrismaClient } from '../generated/prisma/client';
-import { productsData } from './seed-data';
+import { orderItemVariantData, ordersData, ordersItemData, productsData, productVariantsData, userData } from './seed-data';
 
 const connectionString = process.env.DATABASE_URL!;
 const pool = new Pool({ connectionString });
@@ -12,7 +12,48 @@ const prisma = new PrismaClient({ adapter });
 
 async function main(): Promise<void> {
   for (const data of productsData) {
+    const { ...productData } = data;
     await prisma.product.upsert({
+      where: { id: productData.id },
+      update: productData,
+      create: productData,
+    });
+  }
+
+  for (const data of userData) {
+    await prisma.user.upsert({
+      where: { id: data.id },
+      update: data,
+      create: data,
+    });
+  }
+
+  for (const data of ordersData) {
+    await prisma.order.upsert({
+      where: { id: data.id },
+      update: data,
+      create: data,
+    });
+  }
+
+  for (const data of productVariantsData) {
+    await prisma.productVariant.upsert({
+      where: { id: data.id },
+      update: data,
+      create: data,
+    });
+  }
+
+  for (const data of ordersItemData) {
+    await prisma.orderItem.upsert({
+      where: { id: data.id },
+      update: data,
+      create: data,
+    });
+  }
+
+  for (const data of orderItemVariantData) {
+    await prisma.orderItemVariant.upsert({
       where: { id: data.id },
       update: data,
       create: data,
