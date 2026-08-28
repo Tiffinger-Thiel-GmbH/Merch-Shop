@@ -6,6 +6,7 @@ import { ProductVariantCategoryModule } from './modules/product/product-variant-
 import { ProductVariantModule } from './modules/product/product-variant/product-variant.module';
 import { OrderModule } from './modules/order/order.module';
 import { MailModule } from './modules/mail/mail.module';
+import { AssetsModule } from './modules/assets/assets.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { MailModule } from './modules/mail/mail.module';
     ProductVariantCategoryModule,
     ProductVariantModule,
     MailModule,
+    AssetsModule,
   ],
 })
 export class AppModule {}

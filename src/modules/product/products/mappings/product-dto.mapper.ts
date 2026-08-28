@@ -6,5 +6,6 @@ export function mapProductDTO(product: Product): ProductDTO {
     id: product.id,
     name: product.name,
     description: product.description || null,
+    imageUrl: product.imageUrl,
   };
 }
