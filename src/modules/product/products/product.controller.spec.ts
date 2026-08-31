@@ -11,7 +11,7 @@ describe('ProductsController', () => {
     findAll: jest.fn<PromiseLike<Product[]>, []>(),
   };
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [ProductsController],
       providers: [{ provide: ProductService, useValue: mockProductService }],
@@ -21,18 +21,14 @@ describe('ProductsController', () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
-  });
-
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
+    jest.resetAllMocks();
   });
 
   describe('findAll', () => {
     it('should return items and totalCount mapped from the service result', async () => {
       const fakeProducts: Product[] = [
-        { id: 'prod-1', name: 'T-Shirt', description: 'A shirt', createdAt: new Date() },
-        { id: 'prod-2', name: 'Hat', description: null, createdAt: new Date() },
+        { id: 'prod-1', name: 'T-Shirt', description: 'A shirt', imageUrl: 'url', createdAt: new Date() },
+        { id: 'prod-2', name: 'Hat', description: null, imageUrl: 'url', createdAt: new Date() },
       ];
       mockProductService.findAll.mockResolvedValue(fakeProducts);
 

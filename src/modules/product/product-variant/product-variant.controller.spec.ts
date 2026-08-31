@@ -12,7 +12,7 @@ describe('ProductVariantController', () => {
     findVariantsByProductId: jest.fn<PromiseLike<ProductVariant[]>, [string, string?]>(),
   };
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [ProductVariantController],
       providers: [{ provide: ProductVariantService, useValue: mockProductVariantService }],
@@ -22,11 +22,7 @@ describe('ProductVariantController', () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
-  });
-
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
+    jest.resetAllMocks();
   });
 
   describe('findVariants', () => {

@@ -13,7 +13,7 @@ describe('ProductVariantCategoryService', () => {
     },
   };
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [ProductVariantCategoryService, { provide: PrismaService, useValue: mockPrismaService }],
     }).compile();
@@ -22,11 +22,7 @@ describe('ProductVariantCategoryService', () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
-  });
-
-  it('should be defined', () => {
-    expect(service).toBeDefined();
+    jest.resetAllMocks();
   });
 
   describe('findCategoriesByProductId', () => {

@@ -5,7 +5,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import { CreateOrderDTO } from './dto/create-order/create-order.dto';
 import { CreateOrderItemDTO } from './dto/create-order/create-order-item.dto';
 
-import { Order, OrderItem, OrderItemVariant, Product, ProductVariant } from '../../generated/prisma/client';
+import { Order, OrderItem, OrderItemVariant, OrderStatus, Product, ProductVariant } from '../../generated/prisma/client';
 import { OrderCreateArgs, OrderItemCreateArgs, OrderItemVariantCreateArgs, ProductCreateArgs } from '../../generated/prisma/models';
 
 export type ProductWithVariants = Product & { productVariants: ProductVariant[] };
@@ -65,12 +65,13 @@ describe('OrderService', () => {
     it('should create an order with items and matching variants', async () => {
       const dto = buildCreateOrderDTO();
 
-      const fakeOrder = { id: 'order-1', userId: 'user-1', createdAt: new Date() };
+      const fakeOrder = { id: 'order-1', userId: 'user-1', status: OrderStatus.PENDING, createdAt: new Date() };
       mockTx.order.create.mockResolvedValue(fakeOrder);
 
-      const fakeProduct = {
+      const fakeProduct: ProductWithVariants = {
         id: 'prod-1',
         name: 'T-Shirt',
+        imageUrl: 'URL',
         description: 'A shirt',
         createdAt: new Date(),
         productVariants: [
@@ -80,7 +81,7 @@ describe('OrderService', () => {
       };
       mockTx.product.findMany.mockResolvedValue([fakeProduct]);
 
-      const fakeOrderItem = {
+      const fakeOrderItem: OrderItem = {
         id: 'item-1',
         orderId: 'order-1',
         productId: 'prod-1',
@@ -90,7 +91,7 @@ describe('OrderService', () => {
       };
       mockTx.orderItem.create.mockResolvedValue(fakeOrderItem);
 
-      const fakeVariant = {
+      const fakeVariant: OrderItemVariant = {
         id: 'oiv-1',
         orderItemId: 'item-1',
         productVariantId: 'variant-1',
@@ -144,13 +145,14 @@ describe('OrderService', () => {
         ],
       });
 
-      mockTx.order.create.mockResolvedValue({ id: 'order-1', userId: 'user-1', createdAt: new Date() });
+      mockTx.order.create.mockResolvedValue({ id: 'order-1', userId: 'user-1', status: 'PENDING', createdAt: new Date() });
 
-      const fakeProducts = [
+      const fakeProducts: ProductWithVariants[] = [
         {
           id: 'prod-1',
           name: 'T-Shirt',
           description: null,
+          imageUrl: 'Url',
           createdAt: new Date(),
           productVariants: [
             { id: 'prod-1-variant-1', category: 'size', name: 'M', description: 'Medium', productId: 'prod-1', createdAt: new Date() },
@@ -161,6 +163,7 @@ describe('OrderService', () => {
           id: 'prod-2',
           name: 'Hat',
           description: null,
+          imageUrl: 'Url',
           createdAt: new Date(),
           productVariants: [],
         },
@@ -227,7 +230,7 @@ describe('OrderService', () => {
     it('should throw BadRequestException if a product does not exist', async () => {
       const dto = buildCreateOrderDTO();
 
-      mockTx.order.create.mockResolvedValue({ id: 'order-1', userId: 'user-1', createdAt: new Date() });
+      mockTx.order.create.mockResolvedValue({ id: 'order-1', userId: 'user-1', status: 'PENDING', createdAt: new Date() });
       mockTx.product.findMany.mockResolvedValue([]);
 
       await expect(orderService.create(dto)).rejects.toThrow(BadRequestException);
@@ -241,12 +244,13 @@ describe('OrderService', () => {
         items: [buildOrderItemDTO({ productVariantId: ['variant-1'] })],
       });
 
-      mockTx.order.create.mockResolvedValue({ id: 'order-1', userId: 'user-1', createdAt: new Date() });
+      mockTx.order.create.mockResolvedValue({ id: 'order-1', userId: 'user-1', status: 'PENDING', createdAt: new Date() });
 
-      const fakeProduct = {
+      const fakeProduct: ProductWithVariants = {
         id: 'prod-1',
         name: 'T-Shirt',
         description: null,
+        imageUrl: 'url',
         createdAt: new Date(),
         productVariants: [
           { id: 'variant-other', category: 'size', name: 'L', description: 'Large', productId: 'prod-1', createdAt: new Date() },
@@ -272,12 +276,13 @@ describe('OrderService', () => {
     it('should propagate an error if variant creation fails', async () => {
       const dto = buildCreateOrderDTO();
 
-      mockTx.order.create.mockResolvedValue({ id: 'order-1', userId: 'user-1', createdAt: new Date() });
+      mockTx.order.create.mockResolvedValue({ id: 'order-1', userId: 'user-1', status: 'PENDING', createdAt: new Date() });
 
       const fakeProduct = {
         id: 'prod-1',
         name: 'T-Shirt',
         description: null,
+        imageUrl: 'URL',
         createdAt: new Date(),
         productVariants: [
           { id: 'variant-1', category: 'size', name: 'M', description: 'Medium', productId: 'prod-1', createdAt: new Date() },
@@ -305,9 +310,9 @@ describe('OrderService', () => {
         items: [buildOrderItemDTO({ productId: 'prod-1', quantity: 1 }), buildOrderItemDTO({ productId: 'prod-1', quantity: 3 })],
       });
 
-      mockTx.order.create.mockResolvedValue({ id: 'order-1', userId: 'user-1', createdAt: new Date() });
+      mockTx.order.create.mockResolvedValue({ id: 'order-1', userId: 'user-1', status: 'PENDING', createdAt: new Date() });
       mockTx.product.findMany.mockResolvedValue([
-        { id: 'prod-1', name: 'T-Shirt', description: null, createdAt: new Date(), productVariants: [] },
+        { id: 'prod-1', name: 'T-Shirt', description: null, imageUrl: 'URL', createdAt: new Date(), productVariants: [] },
       ]);
 
       // wir betrachte hier die order items nicht, die Werte sind also egal

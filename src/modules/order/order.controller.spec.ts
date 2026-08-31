@@ -25,10 +25,6 @@ describe('OrderController', () => {
     jest.clearAllMocks();
   });
 
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
-  });
-
   describe('create', () => {
     const dto: CreateOrderDTO = {
       userId: 'user-1',
@@ -37,7 +33,7 @@ describe('OrderController', () => {
 
     it('should call orderService.create with the DTO and return the mapped OrderDTO', async () => {
       const serviceResult: OrderServiceCreateResult = {
-        order: { id: 'order-1', userId: 'user-1', createdAt: new Date() },
+        order: { id: 'order-1', userId: 'user-1', status: 'PENDING', createdAt: new Date() },
         orderItems: [
           {
             id: 'item-1',

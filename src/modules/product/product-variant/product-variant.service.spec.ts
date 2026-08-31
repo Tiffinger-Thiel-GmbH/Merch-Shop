@@ -11,7 +11,7 @@ describe('ProductVariantService', () => {
     },
   };
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [ProductVariantService, { provide: PrismaService, useValue: mockPrismaService }],
     }).compile();
@@ -20,11 +20,7 @@ describe('ProductVariantService', () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
-  });
-
-  it('should be defined', () => {
-    expect(service).toBeDefined();
+    jest.resetAllMocks();
   });
 
   describe('findVariantsByProductId', () => {

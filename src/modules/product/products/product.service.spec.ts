@@ -13,7 +13,7 @@ describe('ProductService', () => {
     },
   };
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [ProductService, { provide: PrismaService, useValue: mockPrismaService }],
     }).compile();
@@ -22,18 +22,14 @@ describe('ProductService', () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
-  });
-
-  it('should be defined', () => {
-    expect(service).toBeDefined();
+    jest.resetAllMocks();
   });
 
   describe('findAll', () => {
     it('should return all products from prisma', async () => {
       const fakeProducts: Product[] = [
-        { id: 'prod-1', name: 'T-Shirt', description: 'A shirt', createdAt: new Date() },
-        { id: 'prod-2', name: 'Hat', description: null, createdAt: new Date() },
+        { id: 'prod-1', name: 'T-Shirt', description: 'A shirt', imageUrl: 'url', createdAt: new Date() },
+        { id: 'prod-2', name: 'Hat', description: null, imageUrl: 'url', createdAt: new Date() },
       ];
       mockPrismaService.product.findMany.mockResolvedValue(fakeProducts);
 

@@ -10,7 +10,7 @@ describe('ProductVariantCategoryController', () => {
     findCategoriesByProductId: jest.fn<PromiseLike<ProductVariantCategoriesDTO>, []>(),
   };
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [ProductVariantCategoryController],
       providers: [{ provide: ProductVariantCategoryService, useValue: mockProductVariantCategoryService }],
@@ -20,11 +20,7 @@ describe('ProductVariantCategoryController', () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
-  });
-
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
+    jest.resetAllMocks();
   });
 
   describe('findCategories', () => {
@@ -34,7 +30,7 @@ describe('ProductVariantCategoryController', () => {
 
       const result = await controller.findCategories('prod-1');
 
-      expect(mockProductVariantCategoryService.findCategoriesByProductId).toHaveBeenCalledWith('prod-1');
+      expect(mockProductVariantCategoryService.findCategoriesByProductId).toHaveBeenCalledWith('prod-13');
       expect(result).toEqual(fakeResult);
     });
 
