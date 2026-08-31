@@ -104,7 +104,7 @@ export class MailService implements OnModuleInit {
 
 </div>
       `,
-      text: `Bestellung #${order.id} (${productName}) benötigt Freigabe. Genehmigen: ${approveUrl} | Ablehnen: ${rejectUrl}`,
+      text: `Bestellung #${order.id} (${productName}, ${productVariantSummary}) benötigt Freigabe. Genehmigen: ${approveUrl} | Ablehnen: ${rejectUrl}`,
     });
   }
 }
