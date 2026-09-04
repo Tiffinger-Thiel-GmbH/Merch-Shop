@@ -5,7 +5,7 @@ import { AppModule } from './app.module';
 
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
-
+  process.on('unhandledRejection', err => console.error(err));
   const config = new DocumentBuilder()
     .setTitle('Merch Shop Products & Orders')
     .setDescription('A full list of all routes for the T&T Merch Shop')
