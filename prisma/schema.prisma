@@ -8,6 +8,13 @@ datasource db {
   provider = "postgresql"
 }
 
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  CANCELLED
+  READY
+}
+
 model User {
   id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name      String
@@ -31,6 +38,7 @@ model Product {
 
 model Order {
   id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  status    OrderStatus  @default(PENDING)
   createdAt DateTime @default(now()) @db.Timestamptz(6)
 
   userId String @db.Uuid

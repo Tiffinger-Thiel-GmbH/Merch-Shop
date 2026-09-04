@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { Order, OrderItem, OrderItemVariant } from '../../generated/prisma/client';
+import { Order, OrderItem, OrderItemVariant, OrderStatus } from '../../generated/prisma/client';
 import { CreateOrderDTO } from './dto/create-order/create-order.dto';
 
 type OrderItemWithVariants = OrderItem & {
@@ -11,7 +11,7 @@ type OrderItemWithVariants = OrderItem & {
 export class OrderService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async updateStatus(orderId: string): Promise<{ order: Order; orderItems: OrderItemWithVariants[] }> {
+  async updateStatus(orderId: string, status: OrderStatus): Promise<{ order: Order; orderItems: OrderItemWithVariants[] }> {
     const order = await this.prisma.order.findUnique({
       where: { id: orderId },
     });
@@ -19,11 +19,16 @@ export class OrderService {
       throw new NotFoundException(`Order not found: ${orderId}`);
     }
 
+    const updateOrder = await this.prisma.order.update({
+      where: { id: orderId },
+      data: { status },
+    });
+
     const orderItems = await this.prisma.orderItem.findMany({
       where: { orderId },
       include: { orderItemVariant: true },
     });
-    return { order, orderItems };
+    return { order: updateOrder, orderItems };
   }
 
   async create(orderInput: CreateOrderDTO): Promise<{ order: Order; orderItems: OrderItemWithVariants[] }> {
