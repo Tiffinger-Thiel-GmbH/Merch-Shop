@@ -12,11 +12,10 @@ const prisma = new PrismaClient({ adapter });
 
 async function main(): Promise<void> {
   for (const data of productsData) {
-    const { ...productData } = data;
     await prisma.product.upsert({
-      where: { id: productData.id },
-      update: productData,
-      create: productData,
+      where: { id: data.id },
+      update: data,
+      create: data,
     });
   }
 

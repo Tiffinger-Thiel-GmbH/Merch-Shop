@@ -10,16 +10,41 @@ import {
 type SeedProductInput = ProductCreateInput;
 
 export const productsData: SeedProductInput[] = [
-  { id: '11111111-1111-4111-8111-111111111111', name: 'Classic T-Shirt', description: 'Soft cotton everyday t-shirt' },
-  { id: '22222222-2222-4222-8222-222222222222', name: 'Running Shoes', description: 'Lightweight running shoes for daily training' },
-  { id: '33333333-3333-4333-8333-333333333333', name: 'Denim Jacket', description: 'Blue denim jacket with regular fit' },
-  { id: '44444444-4444-4444-8444-444444444444', name: 'Travel Backpack', description: 'Water-resistant backpack with 24L capacity' },
-  { id: '55555555-5555-4555-8555-555555555555', name: 'Smart Watch', description: 'Fitness smartwatch with heart-rate tracking' },
-  { id: '66666666-6666-4666-8666-666666666666', name: 'Wireless Earbuds', description: 'Bluetooth earbuds with noise isolation' },
-  { id: '77777777-7777-4777-8777-777777777777', name: 'Laptop Sleeve', description: '13-inch protective neoprene sleeve' },
-  { id: '88888888-8888-4888-8888-888888888888', name: 'Yoga Mat', description: 'Non-slip mat for yoga and stretching' },
-  { id: '99999999-9999-4999-8999-999999999999', name: 'Office Chair', description: 'Ergonomic chair with lumbar support' },
-  { id: 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa', name: 'Rain Jacket', description: 'Lightweight waterproof jacket for outdoor use' },
+  { id: '11111111-1111-4111-8111-111111111111', name: 'Classic T-Shirt', description: 'Soft cotton everyday t-shirt', imageUrl: 'URL' },
+  {
+    id: '22222222-2222-4222-8222-222222222222',
+    name: 'Running Shoes',
+    description: 'Lightweight running shoes for daily training',
+    imageUrl: 'URL',
+  },
+  { id: '33333333-3333-4333-8333-333333333333', name: 'Denim Jacket', description: 'Blue denim jacket with regular fit', imageUrl: 'URL' },
+  {
+    id: '44444444-4444-4444-8444-444444444444',
+    name: 'Travel Backpack',
+    description: 'Water-resistant backpack with 24L capacity',
+    imageUrl: 'URL',
+  },
+  {
+    id: '55555555-5555-4555-8555-555555555555',
+    name: 'Smart Watch',
+    description: 'Fitness smartwatch with heart-rate tracking',
+    imageUrl: 'URL',
+  },
+  {
+    id: '66666666-6666-4666-8666-666666666666',
+    name: 'Wireless Earbuds',
+    description: 'Bluetooth earbuds with noise isolation',
+    imageUrl: 'URL',
+  },
+  { id: '77777777-7777-4777-8777-777777777777', name: 'Laptop Sleeve', description: '13-inch protective neoprene sleeve', imageUrl: 'URL' },
+  { id: '88888888-8888-4888-8888-888888888888', name: 'Yoga Mat', description: 'Non-slip mat for yoga and stretching', imageUrl: 'URL' },
+  { id: '99999999-9999-4999-8999-999999999999', name: 'Office Chair', description: 'Ergonomic chair with lumbar support', imageUrl: 'URL' },
+  {
+    id: 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa',
+    name: 'Rain Jacket',
+    description: 'Lightweight waterproof jacket for outdoor use',
+    imageUrl: 'URL',
+  },
 ];
 
 export const productVariantsData: ProductVariantCreateManyInput[] = [
