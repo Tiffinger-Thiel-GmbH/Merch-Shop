@@ -16,7 +16,7 @@ export class OrderController {
   async create(@Body() createOrderDto: CreateOrderDTO): Promise<OrderDTO> {
     const newOrder = await this.orderService.create(createOrderDto);
     const orderDTO = toOrderDTO(newOrder);
-    const newMail = await this.mailService.sendOrderActionEmail(orderDTO);
+    await this.mailService.sendOrderActionEmail(orderDTO);
     return orderDTO;
   }
 }
