@@ -9,22 +9,4 @@ export class ProductService {
   public async findAll(): Promise<Product[]> {
     return await this.prisma.product.findMany();
   }
-
-  public async findOneById(id: string): Promise<Product> {
-    const product = await this.prisma.product.findUnique({
-      where: { id },
-      select: {
-        id: true,
-        name: true,
-        description: true,
-        createdAt: true,
-      },
-    });
-
-    if (!product) {
-      throw new NotFoundException(`Product with id ${id} not found`);
-    }
-
-    return product;
-  }
 }
