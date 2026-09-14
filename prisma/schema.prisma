@@ -29,6 +29,7 @@ model Product {
 
   name        String
   description String?
+  imageUrl  String
 
   orderItems OrderItem[]
 
