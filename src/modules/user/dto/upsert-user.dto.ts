@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, IsOptional, IsString, IsUUID } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 
 export class UpsertUserDto {
   @IsEmail()
@@ -8,8 +8,4 @@ export class UpsertUserDto {
   @IsString()
   @IsNotEmpty()
   userName!: string;
-
-  @IsUUID()
-  @IsOptional()
-  userId?: string;
 }
