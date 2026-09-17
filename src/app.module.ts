@@ -5,6 +5,7 @@ import { ProductModule } from './modules/product/products/product.module';
 import { ProductVariantCategoryModule } from './modules/product/product-variant-category/product-variant-category.module';
 import { ProductVariantModule } from './modules/product/product-variant/product-variant.module';
 import { OrderModule } from './modules/order/order.module';
+import { UserModule } from './modules/user/user.module';
 import { MailModule } from './modules/mail/mail.module';
 import { AssetsModule } from './modules/assets/assets.module';
 
@@ -16,6 +17,7 @@ import { AssetsModule } from './modules/assets/assets.module';
     OrderModule,
     ProductVariantCategoryModule,
     ProductVariantModule,
+    UserModule,
     MailModule,
     AssetsModule,
   ],

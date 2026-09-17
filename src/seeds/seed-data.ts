@@ -495,9 +495,7 @@ export const productVariantsData: ProductVariantCreateManyInput[] = [
   },
 ];
 
-export const userData: UserCreateManyInput[] = [
-  { id: '9aaca58e-4ea2-4008-bfc7-2007cd91c0f1', email: 'test@test.example', name: 'Test', passwordHash: '123456' },
-];
+export const userData: UserCreateManyInput[] = [{ id: '9aaca58e-4ea2-4008-bfc7-2007cd91c0f1', email: 'test@test.example', name: 'Test' }];
 
 export const ordersData: OrderCreateManyInput[] = [
   { id: '20000000-0000-4000-8000-000000000001', userId: userData[0].id! },
