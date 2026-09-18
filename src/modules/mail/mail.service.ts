@@ -93,6 +93,7 @@ export class MailService implements OnModuleInit {
 </div>
       `,
       text: `Bestellung #${order.id} von ${user.name} (${user.email}) (${productSummary}, ${productVariantSummary}),
+    `,
     });
   }
 }
