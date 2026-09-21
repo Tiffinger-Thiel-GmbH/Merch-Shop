@@ -2,7 +2,6 @@ import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import * as nodemailer from 'nodemailer';
 import SMTPTransport from 'nodemailer/lib/smtp-transport';
 import { OrderDTO } from '../order/dto/order/order.dto';
-import { UserDTO } from '../user/dto/user.dto';
 import { toUserDTO } from '../user/dto/to-user-dto.mapper';
 import { UserService } from '../user/user.service';
 
@@ -54,7 +53,7 @@ export class MailService implements OnModuleInit {
   // Order-Mail mit einfachen Action-Links
   async sendOrderActionEmail(order: OrderDTO): Promise<void> {
     const userRecord = await this.userService.findById(order.userId);
-    const user: UserDTO = toUserDTO(userRecord!);
+    const user = toUserDTO(userRecord!);
     const productSummary = order.items.map(item => `${item.name} × ${item.quantity}`).join(', ');
     const filterProductVariants = order.items.flatMap(item => item.productVariants ?? []);
     const productVariantSummary = filterProductVariants.map(variant => `${variant.category}: ${variant.name}`).join(', ');
