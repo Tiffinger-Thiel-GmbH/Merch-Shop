@@ -5,6 +5,11 @@ import { AppModule } from './app.module';
 
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
+  app.enableCors({
+    origin: process.env.ALLOWED_HOST,
+    methods: 'GET, PATCH, POST',
+    maxAge: 30000,
+  });
   process.on('unhandledRejection', err => console.error(err));
   const config = new DocumentBuilder()
     .setTitle('Merch Shop Products & Orders')
