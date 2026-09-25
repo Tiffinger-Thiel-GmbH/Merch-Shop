@@ -10,6 +10,7 @@ async function bootstrap(): Promise<void> {
     methods: 'GET, PATCH, POST',
     maxAge: 30000,
   });
+  process.on('unhandledRejection', err => console.error(err));
   const config = new DocumentBuilder()
     .setTitle('Merch Shop Products & Orders')
     .setDescription('A full list of all routes for the T&T Merch Shop')
