@@ -14,25 +14,25 @@ export const productsData: SeedProductInput[] = [
     id: '11111111-1111-4111-8111-111111111111',
     name: 'T-Shirt',
     description: 'Schwarzes T-Shirt aus Baumwolle',
-    imageUrl: 'http://localhost:3000/assets/default',
+    imageUrl: 'http://localhost:3000/assets/aa98aaa9-ed22-4c97-b9e4-d156cbb12917',
   },
   {
     id: '22222222-2222-4222-8222-222222222222',
     name: 'Pullijacke',
     description: 'Schwarze Sweatjacke mit Kapuze und Reißverschluss',
-    imageUrl: 'http://localhost:3000/assets/default',
+    imageUrl: 'http://localhost:3000/assets/b17f6d64-fa5a-46d9-a8c6-7c0de63ffb85',
   },
   {
     id: '33333333-3333-4333-8333-333333333333',
     name: 'Tiffiletten',
     description: 'Schwarze Adiletten mit gepolstertem Fußbett',
-    imageUrl: 'http://localhost:3000/assets/default',
+    imageUrl: 'http://localhost:3000/assets/90631878-dc6e-4ccd-821c-b8cf8096c1b6',
   },
   {
     id: '44444444-4444-4444-8444-444444444444',
     name: 'DinA4 Block weiß kariert',
     description: 'Weißer DinA4 Notizblock mit karierten Seiten',
-    imageUrl: 'http://localhost:3000/assets/default',
+    imageUrl: 'http://localhost:3000/assets/d62dc74d-5a6d-4af8-ab7b-c58daf1206f6',
   },
   {
     id: '55555555-5555-4555-8555-555555555555',
@@ -50,7 +50,13 @@ export const productsData: SeedProductInput[] = [
     id: '77777777-7777-4777-8777-777777777777',
     name: 'Feuerzeug',
     description: 'Schwarzes Einweg-Feuerzeug',
-    imageUrl: 'http://localhost:3000/assets/default',
+    imageUrl: 'http://localhost:3000/assets/634a7826-ff9c-4ab0-b165-b567e3c8f419',
+  },
+  {
+    id: '88888888-8888-4888-8888-888888888888',
+    name: 'Socken',
+    description: 'Schwarze Socken aus Baumwolle',
+    imageUrl: 'http://localhost:3000/assets/4f831fcc-41b0-45d7-b591-0dcd11532a3c',
   },
 ];
 
@@ -270,6 +276,35 @@ export const productVariantsData: ProductVariantCreateManyInput[] = [
     category: 'Farbe',
     name: 'Schwarz',
     description: 'Deckendes Schwarz',
+  },
+  // Socken
+  {
+    id: '10000000-0000-4000-8000-000000000031',
+    productId: '88888888-8888-4888-8888-888888888888',
+    category: 'Farbe',
+    name: 'Schwarz',
+    description: 'Deckendes Schwarz',
+  },
+  {
+    id: '10000000-0000-4000-8000-000000000032',
+    productId: '88888888-8888-4888-8888-888888888888',
+    category: 'Größe',
+    name: '35-38',
+    description: 'Größe 35-38',
+  },
+  {
+    id: '10000000-0000-4000-8000-000000000033',
+    productId: '88888888-8888-4888-8888-888888888888',
+    category: 'Größe',
+    name: '39-42',
+    description: 'Größe 39-42',
+  },
+  {
+    id: '10000000-0000-4000-8000-000000000034',
+    productId: '88888888-8888-4888-8888-888888888888',
+    category: 'Größe',
+    name: '43-46',
+    description: 'Größe 43-46',
   },
 ];
 
