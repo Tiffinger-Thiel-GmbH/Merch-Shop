@@ -30,7 +30,7 @@ export const productsData: SeedProductInput[] = [
   },
   {
     id: '44444444-4444-4444-8444-444444444444',
-    name: 'DinA4 Block weiß kariert',
+    name: 'DinA4 Block',
     description: 'Weißer DinA4 Notizblock mit karierten Seiten',
     imageUrl: 'http://localhost:3000/assets/d62dc74d-5a6d-4af8-ab7b-c58daf1206f6',
   },
@@ -305,6 +305,20 @@ export const productVariantsData: ProductVariantCreateManyInput[] = [
     category: 'Größe',
     name: '43-46',
     description: 'Größe 43-46',
+  },
+  {
+    id: '10000000-0000-4000-8000-000000000035',
+    productId: '44444444-4444-4444-8444-444444444444',
+    category: 'Farbe',
+    name: 'weiß',
+    description: 'Farbe weiß',
+  },
+  {
+    id: '10000000-0000-4000-8000-000000000036',
+    productId: '44444444-4444-4444-8444-444444444444',
+    category: 'Größe',
+    name: 'A4',
+    description: 'Größe A4',
   },
 ];
 
