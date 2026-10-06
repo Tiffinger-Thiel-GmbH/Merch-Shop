@@ -51,11 +51,10 @@ export class MailService implements OnModuleInit {
 
   // Order-Mail mit einfachen Action-Links
   async sendOrderActionEmail(order: OrderDTO): Promise<void> {
-    const userRecord = await this.userService.findById(order.userId);
-    if (!userRecord) {
+    const user = await this.userService.findById(order.userId);
+    if (!user) {
       throw new BadRequestException(`User not found: ${order.userId}`);
     }
-    const user = userRecord;
     const productSummary = order.items.map(item => `${item.name} × ${item.quantity}`).join(', ');
     const filterProductVariants = order.items.flatMap(item => item.productVariants ?? []);
     const productVariantSummary = filterProductVariants.map(variant => `${variant.category}: ${variant.name}`).join(', ');
