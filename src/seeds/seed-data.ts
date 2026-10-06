@@ -38,13 +38,13 @@ export const productsData: SeedProductInput[] = [
     id: '55555555-5555-4555-8555-555555555555',
     name: 'Notizheft',
     description: 'Schwarzes Notizheft mit karierten Seiten',
-    imageUrl: 'http://localhost:3000/assets/default',
+    imageUrl: 'http://localhost:3000/assets/b5a57cb9-3a39-4b43-a0a9-72c5f774d7cd',
   },
   {
     id: '66666666-6666-4666-8666-666666666666',
     name: 'Kugelschreiber',
-    description: 'Schwarzer Kugelschreiber mit blauer Mine',
-    imageUrl: 'http://localhost:3000/assets/default',
+    description: 'Kork Kugelschreiber mit blauer Mine',
+    imageUrl: 'http://localhost:3000/assets/b3d8f8da-4223-4f2b-8438-b333e7390b2f',
   },
   {
     id: '77777777-7777-4777-8777-777777777777',
@@ -266,7 +266,7 @@ export const productVariantsData: ProductVariantCreateManyInput[] = [
     id: '10000000-0000-4000-8000-000000000029',
     productId: '66666666-6666-4666-8666-666666666666',
     category: 'Farbe',
-    name: 'Schwarz',
+    name: 'Blau',
     description: 'Deckendes Schwarz',
   },
   // Feuerzeug
