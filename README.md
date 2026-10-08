@@ -47,6 +47,7 @@ erDiagram
         string name
         string description "nullable"
         date   createdAt "Timestamp w Zone"
+        string imageUrl "UUID"
     }
     ORDER_ITEM {
         string id PK "UUID"

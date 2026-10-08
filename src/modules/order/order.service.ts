@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { Order, OrderItem, OrderItemVariant, Product, ProductVariant } from '../../generated/prisma/client';
+import { Order, OrderItem, OrderItemVariant, OrderStatus, Product, ProductVariant } from '../../generated/prisma/client';
 import { CreateOrderDTO } from './dto/create-order/create-order.dto';
 
 export type OrderItemWithVariants = OrderItem & {
@@ -17,7 +17,27 @@ export type OrderServiceCreateResult = {
 export class OrderService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async create(orderInput: CreateOrderDTO): Promise<OrderServiceCreateResult> {
+  async updateStatus(orderId: string, status: OrderStatus): Promise<{ order: Order; orderItems: OrderItemWithVariants[] }> {
+    const order = await this.prisma.order.findUnique({
+      where: { id: orderId },
+    });
+    if (!order) {
+      throw new NotFoundException(`Order not found: ${orderId}`);
+    }
+
+    const updateOrder = await this.prisma.order.update({
+      where: { id: orderId },
+      data: { status },
+    });
+
+    const orderItems = await this.prisma.orderItem.findMany({
+      where: { orderId },
+      include: { orderItemVariant: true },
+    });
+    return { order: updateOrder, orderItems };
+  }
+
+  async create(orderInput: CreateOrderDTO): Promise<{ order: Order; orderItems: OrderItemWithVariants[] }> {
     const productIds = [...new Set(orderInput.items.map(item => item.productId))];
 
     return this.prisma.$transaction(async tx => {
