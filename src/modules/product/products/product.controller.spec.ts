@@ -36,8 +36,13 @@ describe('ProductsController', () => {
 
       expect(result).toEqual({
         items: [
-          { id: 'prod-1', name: 'T-Shirt', description: 'A shirt' },
-          { id: 'prod-2', name: 'Hat', description: null },
+          {
+            id: 'prod-1',
+            name: 'T-Shirt',
+            description: 'A shirt',
+            imageUrl: 'url',
+          },
+          { id: 'prod-2', name: 'Hat', description: null, imageUrl: 'url' },
         ],
         totalCount: 2,
       } satisfies ProductListDTO);
