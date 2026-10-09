@@ -203,7 +203,7 @@ describe('OrderService', () => {
           name: 'Red',
           description: 'Red',
           productVariantId: 'prod-1-variant-2',
-          orderItemId: 'prod-1-item-1',
+          orderItemId: 'order-1-item-1',
         },
       ];
       mockTx.orderItemVariant.create.mockImplementation(createOrderVariant => {

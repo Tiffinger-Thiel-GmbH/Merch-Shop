@@ -4,6 +4,7 @@ import { OrderService } from './order.service';
 import { CreateOrderDTO } from './dto/create-order/create-order.dto';
 import { OrderServiceCreateResult } from './order.service';
 import { OrderDTO } from './dto/order/order.dto';
+import { MailService } from '../mail/mail.service';
 
 describe('OrderController', () => {
   let controller: OrderController;
@@ -15,7 +16,10 @@ describe('OrderController', () => {
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [OrderController],
-      providers: [{ provide: OrderService, useValue: mockOrderService }],
+      providers: [
+        { provide: OrderService, useValue: mockOrderService },
+        { provide: MailService, useValue: { sendOrderActionEmail: jest.fn() } },
+      ],
     }).compile();
 
     controller = module.get<OrderController>(OrderController);
