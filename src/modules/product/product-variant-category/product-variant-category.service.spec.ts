@@ -1,15 +1,13 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { PrismaService } from '../../prisma/prisma.service';
 import { ProductVariantCategoryService } from './product-variant-category.service';
-import { ProductVariant } from '../../../generated/prisma/client';
-import { ProductVariantCreateArgs } from '../../../generated/prisma/models';
 
 describe('ProductVariantCategoryService', () => {
   let service: ProductVariantCategoryService;
 
   const mockPrismaService = {
     productVariant: {
-      findMany: jest.fn<PromiseLike<ProductVariant[]>, [ProductVariantCreateArgs]>(),
+      findMany: jest.fn(),
     },
   };
 

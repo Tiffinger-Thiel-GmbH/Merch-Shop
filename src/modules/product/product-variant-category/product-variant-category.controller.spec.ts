@@ -30,7 +30,7 @@ describe('ProductVariantCategoryController', () => {
 
       const result = await controller.findCategories('prod-1');
 
-      expect(mockProductVariantCategoryService.findCategoriesByProductId).toHaveBeenCalledWith('prod-13');
+      expect(mockProductVariantCategoryService.findCategoriesByProductId).toHaveBeenCalledWith('prod-1');
       expect(result).toEqual(fakeResult);
     });
 
