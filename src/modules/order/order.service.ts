@@ -1,12 +1,18 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { Order, OrderItem, OrderItemVariant, OrderStatus } from '../../generated/prisma/client';
+import { Order, OrderItem, OrderItemVariant, OrderStatus, Product, ProductVariant } from '../../generated/prisma/client';
 import { CreateOrderDTO } from './dto/create-order/create-order.dto';
 
-type OrderItemWithVariants = OrderItem & {
+export type OrderItemWithVariants = OrderItem & {
   orderItemVariant: OrderItemVariant[];
 };
-
+export type ProductWithVariants = {
+  productVariants: ProductVariant[];
+} & Product;
+export type OrderServiceCreateResult = {
+  order: Order;
+  orderItems: OrderItemWithVariants[];
+};
 @Injectable()
 export class OrderService {
   constructor(private readonly prisma: PrismaService) {}
@@ -41,7 +47,7 @@ export class OrderService {
         },
       });
 
-      const products = await tx.product.findMany({
+      const products: ProductWithVariants[] = await tx.product.findMany({
         where: {
           id: {
             in: productIds,
