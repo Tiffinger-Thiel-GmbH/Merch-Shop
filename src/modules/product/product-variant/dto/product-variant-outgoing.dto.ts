@@ -2,7 +2,7 @@ import { IsNotEmpty, IsString, IsUUID } from 'class-validator';
 
 export class ProductVariantOutgoingDTO {
   @IsString()
-  category!: string | undefined;
+  category!: string;
   @IsString()
   name!: string;
   @IsUUID()

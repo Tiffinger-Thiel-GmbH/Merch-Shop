@@ -1,4 +1,3 @@
-import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { PrismaModule } from './modules/prisma/prisma.module';
 import { ProductModule } from './modules/product/products/product.module';
@@ -8,7 +7,7 @@ import { OrderModule } from './modules/order/order.module';
 import { UserModule } from './modules/user/user.module';
 import { MailModule } from './modules/mail/mail.module';
 import { AssetsModule } from './modules/assets/assets.module';
-import { LoggingMiddleware } from './modules/logging/loggingMiddleware';
+import { Module } from '@nestjs/common';
 
 @Module({
   imports: [
@@ -23,8 +22,4 @@ import { LoggingMiddleware } from './modules/logging/loggingMiddleware';
     AssetsModule,
   ],
 })
-export class AppModule {
-  configure(consumer: MiddlewareConsumer): void {
-    consumer.apply(LoggingMiddleware).forRoutes({ path: '*', method: RequestMethod.ALL });
-  }
-}
+export class AppModule {}
