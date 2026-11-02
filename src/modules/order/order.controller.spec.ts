@@ -26,7 +26,7 @@ describe('OrderController', () => {
   });
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    jest.resetAllMocks();
   });
 
   describe('create', () => {

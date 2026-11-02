@@ -28,16 +28,16 @@ describe('ProductVariantCategoryController', () => {
       const fakeResult = { categories: ['Color', 'Size'] };
       mockProductVariantCategoryService.findCategoriesByProductId.mockResolvedValue(fakeResult);
 
-      const result = await controller.findCategories('prod-1');
+      const result = await controller.findCategories('a800a125-27ac-49cc-8125-ec8ae1b000a5');
 
-      expect(mockProductVariantCategoryService.findCategoriesByProductId).toHaveBeenCalledWith('prod-1');
+      expect(mockProductVariantCategoryService.findCategoriesByProductId).toHaveBeenCalledWith('a800a125-27ac-49cc-8125-ec8ae1b000a5');
       expect(result).toEqual(fakeResult);
     });
 
     it('should propagate errors from the service', async () => {
       mockProductVariantCategoryService.findCategoriesByProductId.mockRejectedValue(new Error('DB error'));
 
-      await expect(controller.findCategories('prod-1')).rejects.toThrow('DB error');
+      await expect(controller.findCategories('a800a125-27ac-49cc-8125-ec8ae1b000a5')).rejects.toThrow('DB error');
     });
   });
 });
