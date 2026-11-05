@@ -16,6 +16,6 @@ export class AssetsService {
     }
 
     const buffer = createReadStream(localAssetPath);
-    return { mimeType: 'application/jpeg', fileName: basename(localAssetPath), content: buffer };
+    return { mimeType: 'image/jpeg', fileName: basename(localAssetPath), content: buffer };
   }
 }

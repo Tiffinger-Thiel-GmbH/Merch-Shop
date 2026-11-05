@@ -1,10 +1,17 @@
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { Logger, ValidationPipe } from '@nestjs/common';
+import helmet from 'helmet';
 import { AppModule } from './app.module';
 
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
+  app.use(
+    helmet({
+      crossOriginResourcePolicy: { policy: 'cross-origin' },
+    }),
+  );
+  app.enableCors({ origin: ['https://localhost:3978'] });
   process.on('unhandledRejection', err => console.error(err));
   const config = new DocumentBuilder()
     .setTitle('Merch Shop Products & Orders')
