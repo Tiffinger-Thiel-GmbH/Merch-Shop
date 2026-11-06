@@ -10,9 +10,6 @@ services:
       MAIL_FROM: ${MAIL_FROM:-merch@example.de}
       MAIL_TO: ${MAIL_TO:-approver@example.de}
       APP_BASE_URL: ${APP_BASE_URL:-http://localhost:3000}
-    ports:
-      - '3000:3000'
-      - '1025:1025'
     depends_on:
       db:
         condition: service_healthy
