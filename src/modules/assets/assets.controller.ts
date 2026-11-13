@@ -27,7 +27,9 @@ export class AssetsController {
 
     res.set({
       'Content-Type': mimeType,
-      'Content-Disposition': 'attachment; filename="' + fileName + '"',
+      'Content-Disposition': 'inline; filename="' + fileName + '"',
+      'Access-Control-Allow-Origin': '*',
+      'Cross-Origin-Resource-Policy': 'cross-origin',
     });
 
     return new StreamableFile(content, { type: mimeType });

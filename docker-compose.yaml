@@ -1,24 +1,38 @@
 services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/app_db
+      MAIL_FROM: ${MAIL_FROM:-merch@example.de}
+      MAIL_TO: ${MAIL_TO:-approver@example.de}
+      APP_BASE_URL: ${APP_BASE_URL:-http://localhost:3000}
+    depends_on:
+      db:
+        condition: service_healthy
+    command: ['sh', '-c', 'npx prisma migrate deploy && npm run start:prod']
+    ports:
+      - 3000:3000
+
   db:
-    image: postgres:18
-    restart: always
+    image: postgres:17
+    restart: unless-stopped
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: app_db
     ports:
       - '5432:5432'
-  mailpit:
-    image: axllent/mailpit
-    container_name: mailpit
-    restart: unless-stopped
     volumes:
-      - ./data:/data
-    ports:
-      - 8025:8025
-      - 1025:1025
-    environment:
-      MP_MAX_MESSAGES: 5000
-      MP_DATABASE: /data/mailpit.db
-      MP_SMTP_AUTH_ACCEPT_ANY: 1
-      MP_SMTP_AUTH_ALLOW_INSECURE: 1
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres -d app_db']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  postgres_data:
