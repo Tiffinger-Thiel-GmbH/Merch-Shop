@@ -1,59 +1,52 @@
-import {
-  OrderCreateManyInput,
-  OrderItemCreateManyInput,
-  OrderItemVariantCreateManyInput,
-  ProductCreateInput,
-  ProductVariantCreateManyInput,
-  UserCreateManyInput,
-} from '../generated/prisma/models';
+import { ProductCreateInput, ProductVariantCreateManyInput } from '../generated/prisma/models';
 
 type SeedProductInput = ProductCreateInput;
 
 export const productsData: SeedProductInput[] = [
   {
-    id: '11111111-1111-4111-8111-111111111111',
+    id: '80d6a191-a06f-4aa8-b7cb-737e61092ddc',
     name: 'T-Shirt',
     description: 'Schwarzes T-Shirt aus Baumwolle',
     imageUrl: 'http://localhost:3000/assets/aa98aaa9-ed22-4c97-b9e4-d156cbb12917',
   },
   {
-    id: '22222222-2222-4222-8222-222222222222',
+    id: 'f19b3bc6-59a5-4577-abb9-e49b21044e0e',
     name: 'Pullijacke',
     description: 'Schwarze Sweatjacke mit Kapuze und Reißverschluss',
     imageUrl: 'http://localhost:3000/assets/b17f6d64-fa5a-46d9-a8c6-7c0de63ffb85',
   },
   {
-    id: '33333333-3333-4333-8333-333333333333',
+    id: '73f457d4-83b7-43db-87d9-73d91b46f7f7',
     name: 'Tiffiletten',
     description: 'Schwarze Adiletten mit gepolstertem Fußbett',
     imageUrl: 'http://localhost:3000/assets/90631878-dc6e-4ccd-821c-b8cf8096c1b6',
   },
   {
-    id: '44444444-4444-4444-8444-444444444444',
+    id: '152869f3-6394-4f31-bba7-d5d6ce81f080',
     name: 'DinA4 Block',
     description: 'Weißer DinA4 Notizblock mit karierten Seiten',
     imageUrl: 'http://localhost:3000/assets/d62dc74d-5a6d-4af8-ab7b-c58daf1206f6',
   },
   {
-    id: '55555555-5555-4555-8555-555555555555',
+    id: '30e9e439-e891-45f9-82b2-40ff376f3e64',
     name: 'Notizheft',
     description: 'Schwarzes Notizheft mit karierten Seiten',
     imageUrl: 'http://localhost:3000/assets/b5a57cb9-3a39-4b43-a0a9-72c5f774d7cd',
   },
   {
-    id: '66666666-6666-4666-8666-666666666666',
+    id: 'b374b990-5fa8-42be-b55f-11be732af24d',
     name: 'Kugelschreiber',
     description: 'Kork Kugelschreiber mit blauer Mine',
     imageUrl: 'http://localhost:3000/assets/b3d8f8da-4223-4f2b-8438-b333e7390b2f',
   },
   {
-    id: '77777777-7777-4777-8777-777777777777',
+    id: '4583a6fe-43c7-48c1-9eb4-db73193448fb',
     name: 'Feuerzeug',
     description: 'Schwarzes Einweg-Feuerzeug',
     imageUrl: 'http://localhost:3000/assets/634a7826-ff9c-4ab0-b165-b567e3c8f419',
   },
   {
-    id: '88888888-8888-4888-8888-888888888888',
+    id: '2c4fbfbe-2aa6-453b-8436-9d1f39d801da',
     name: 'Socken',
     description: 'Schwarze Socken aus Baumwolle',
     imageUrl: 'http://localhost:3000/assets/4f831fcc-41b0-45d7-b591-0dcd11532a3c',
@@ -63,502 +56,261 @@ export const productsData: SeedProductInput[] = [
 export const productVariantsData: ProductVariantCreateManyInput[] = [
   // T-Shirt
   {
-    id: '10000000-0000-4000-8000-000000000001',
-    productId: '11111111-1111-4111-8111-111111111111',
+    id: '0a799968-4bc8-4264-bc21-24e4cbc5cfdf',
+    productId: '80d6a191-a06f-4aa8-b7cb-737e61092ddc',
     category: 'Farbe',
     name: 'Schwarz',
     description: 'Deckendes Schwarz',
   },
   {
-    id: '10000000-0000-4000-8000-000000000002',
-    productId: '11111111-1111-4111-8111-111111111111',
+    id: '3e87472e-c103-44cc-812a-f06843123470',
+    productId: '80d6a191-a06f-4aa8-b7cb-737e61092ddc',
     category: 'Größe',
     name: 'S',
     description: 'Größe S',
   },
   {
-    id: '10000000-0000-4000-8000-000000000003',
-    productId: '11111111-1111-4111-8111-111111111111',
+    id: '8ac5aed9-c5f3-49eb-a834-1b8c548316fc',
+    productId: '80d6a191-a06f-4aa8-b7cb-737e61092ddc',
     category: 'Größe',
     name: 'M',
     description: 'Größe M',
   },
   {
-    id: '10000000-0000-4000-8000-000000000004',
-    productId: '11111111-1111-4111-8111-111111111111',
+    id: '74980288-4130-4e90-94a2-c417f5b7b672',
+    productId: '80d6a191-a06f-4aa8-b7cb-737e61092ddc',
     category: 'Größe',
     name: 'L',
     description: 'Größe L',
   },
   {
-    id: '10000000-0000-4000-8000-000000000005',
-    productId: '11111111-1111-4111-8111-111111111111',
+    id: 'd10af21d-7e82-42bd-933d-5ff17caa7356',
+    productId: '80d6a191-a06f-4aa8-b7cb-737e61092ddc',
     category: 'Größe',
     name: 'XL',
     description: 'Größe XL',
   },
   {
-    id: '10000000-0000-4000-8000-000000000006',
-    productId: '11111111-1111-4111-8111-111111111111',
+    id: '1074a931-646d-4d06-821c-8490bc12972a',
+    productId: '80d6a191-a06f-4aa8-b7cb-737e61092ddc',
     category: 'Größe',
     name: 'XXL',
     description: 'Größe XXL',
   },
   {
-    id: '10000000-0000-4000-8000-000000000007',
-    productId: '11111111-1111-4111-8111-111111111111',
+    id: '675cb671-966f-4296-a64f-d30c4ea1321e',
+    productId: '80d6a191-a06f-4aa8-b7cb-737e61092ddc',
     category: 'Größe',
     name: '3XL',
     description: 'Größe 3XL',
   },
   // Pullijacke
   {
-    id: '10000000-0000-4000-8000-000000000008',
-    productId: '22222222-2222-4222-8222-222222222222',
+    id: 'bd24e4b1-783c-427f-86fd-f58534b86f63',
+    productId: 'f19b3bc6-59a5-4577-abb9-e49b21044e0e',
     category: 'Farbe',
     name: 'Schwarz',
     description: 'Deckendes Schwarz',
   },
   {
-    id: '10000000-0000-4000-8000-000000000009',
-    productId: '22222222-2222-4222-8222-222222222222',
+    id: 'd4ab2383-3155-45a4-a92c-66aa91f6f245',
+    productId: 'f19b3bc6-59a5-4577-abb9-e49b21044e0e',
     category: 'Größe',
     name: 'S',
     description: 'Größe S',
   },
   {
-    id: '10000000-0000-4000-8000-000000000010',
-    productId: '22222222-2222-4222-8222-222222222222',
+    id: 'f6ec7030-20b8-4cdd-8e70-bb2c46510e07',
+    productId: 'f19b3bc6-59a5-4577-abb9-e49b21044e0e',
     category: 'Größe',
     name: 'M',
     description: 'Größe M',
   },
   {
-    id: '10000000-0000-4000-8000-000000000011',
-    productId: '22222222-2222-4222-8222-222222222222',
+    id: '55fc9e17-4f6c-4608-af3f-6cbdcf8be204',
+    productId: 'f19b3bc6-59a5-4577-abb9-e49b21044e0e',
     category: 'Größe',
     name: 'L',
     description: 'Größe L',
   },
   {
-    id: '10000000-0000-4000-8000-000000000012',
-    productId: '22222222-2222-4222-8222-222222222222',
+    id: 'aff5b4f3-cb7d-427c-b1dc-e014d3c1630a',
+    productId: 'f19b3bc6-59a5-4577-abb9-e49b21044e0e',
     category: 'Größe',
     name: 'XL',
     description: 'Größe XL',
   },
   {
-    id: '10000000-0000-4000-8000-000000000013',
-    productId: '22222222-2222-4222-8222-222222222222',
+    id: '61398866-458e-401d-bdc1-cdfa6cdafeca',
+    productId: 'f19b3bc6-59a5-4577-abb9-e49b21044e0e',
     category: 'Größe',
     name: 'XXL',
     description: 'Größe XXL',
   },
   {
-    id: '10000000-0000-4000-8000-000000000014',
-    productId: '22222222-2222-4222-8222-222222222222',
+    id: '6070f725-4fc9-49cb-8f37-b4dbc2c890b1',
+    productId: 'f19b3bc6-59a5-4577-abb9-e49b21044e0e',
     category: 'Größe',
     name: '3XL',
     description: 'Größe 3XL',
   },
   // Tiffiletten
   {
-    id: '10000000-0000-4000-8000-000000000015',
-    productId: '33333333-3333-4333-8333-333333333333',
+    id: '90ac431e-f523-4b2e-aeb2-3deeb2f010fd',
+    productId: '73f457d4-83b7-43db-87d9-73d91b46f7f7',
     category: 'Farbe',
     name: 'Schwarz',
     description: 'Deckendes Schwarz',
   },
   {
-    id: '10000000-0000-4000-8000-000000000016',
-    productId: '33333333-3333-4333-8333-333333333333',
+    id: '6006873a-3a05-4602-8eb6-4902bc95e83f',
+    productId: '73f457d4-83b7-43db-87d9-73d91b46f7f7',
     category: 'Größe',
     name: '37',
     description: 'Größe 37',
   },
   {
-    id: '10000000-0000-4000-8000-000000000017',
-    productId: '33333333-3333-4333-8333-333333333333',
+    id: '72883503-1e4a-48da-82d8-c14c37371afe',
+    productId: '73f457d4-83b7-43db-87d9-73d91b46f7f7',
     category: 'Größe',
     name: '38',
     description: 'Größe 38',
   },
   {
-    id: '10000000-0000-4000-8000-000000000018',
-    productId: '33333333-3333-4333-8333-333333333333',
+    id: '8523cf89-59ef-4871-9daf-97be00602b2f',
+    productId: '73f457d4-83b7-43db-87d9-73d91b46f7f7',
     category: 'Größe',
     name: '39',
     description: 'Größe 39',
   },
   {
-    id: '10000000-0000-4000-8000-000000000019',
-    productId: '33333333-3333-4333-8333-333333333333',
+    id: '4605a15d-c764-451b-8d33-9a065d709c50',
+    productId: '73f457d4-83b7-43db-87d9-73d91b46f7f7',
     category: 'Größe',
     name: '40',
     description: 'Größe 40',
   },
   {
-    id: '10000000-0000-4000-8000-000000000020',
-    productId: '33333333-3333-4333-8333-333333333333',
+    id: '78805e79-54a8-4f69-8286-d794b593b450',
+    productId: '73f457d4-83b7-43db-87d9-73d91b46f7f7',
     category: 'Größe',
     name: '41',
     description: 'Größe 41',
   },
   {
-    id: '10000000-0000-4000-8000-000000000021',
-    productId: '33333333-3333-4333-8333-333333333333',
+    id: 'c59f6c91-9330-43c8-b670-39ed6eb5a2a2',
+    productId: '73f457d4-83b7-43db-87d9-73d91b46f7f7',
     category: 'Größe',
     name: '42',
     description: 'Größe 42',
   },
   {
-    id: '10000000-0000-4000-8000-000000000022',
-    productId: '33333333-3333-4333-8333-333333333333',
+    id: '6d4b2cd2-6377-4645-8703-45ff21aa8f9f',
+    productId: '73f457d4-83b7-43db-87d9-73d91b46f7f7',
     category: 'Größe',
     name: '43',
     description: 'Größe 43',
   },
   {
-    id: '10000000-0000-4000-8000-000000000023',
-    productId: '33333333-3333-4333-8333-333333333333',
+    id: '4ccbda9e-40dd-49b2-a133-17f8a367de8c',
+    productId: '73f457d4-83b7-43db-87d9-73d91b46f7f7',
     category: 'Größe',
     name: '44',
     description: 'Größe 44',
   },
   {
-    id: '10000000-0000-4000-8000-000000000024',
-    productId: '33333333-3333-4333-8333-333333333333',
+    id: 'b1dbe337-e02c-415c-b862-edbf26d5af8e',
+    productId: '73f457d4-83b7-43db-87d9-73d91b46f7f7',
     category: 'Größe',
     name: '45',
     description: 'Größe 45',
   },
   {
-    id: '10000000-0000-4000-8000-000000000025',
-    productId: '33333333-3333-4333-8333-333333333333',
+    id: 'a8d21913-e10c-4f9f-a223-82388895f9ef',
+    productId: '73f457d4-83b7-43db-87d9-73d91b46f7f7',
     category: 'Größe',
     name: '46',
     description: 'Größe 46',
   },
   {
-    id: '10000000-0000-4000-8000-000000000026',
-    productId: '33333333-3333-4333-8333-333333333333',
+    id: 'fcbabbf7-be53-47f9-b56d-8f09d9ba0569',
+    productId: '73f457d4-83b7-43db-87d9-73d91b46f7f7',
     category: 'Größe',
     name: '47',
     description: 'Größe 47',
   },
   // Notizheft
   {
-    id: '10000000-0000-4000-8000-000000000027',
-    productId: '55555555-5555-4555-8555-555555555555',
+    id: '5bac7307-8baa-4320-9cfd-f8ef720ba630',
+    productId: '30e9e439-e891-45f9-82b2-40ff376f3e64',
     category: 'Farbe',
     name: 'Schwarz',
     description: 'Deckendes Schwarz',
   },
   {
-    id: '10000000-0000-4000-8000-000000000028',
-    productId: '55555555-5555-4555-8555-555555555555',
+    id: '7e92cdc6-3bb2-4304-8a10-e5060c982025',
+    productId: '30e9e439-e891-45f9-82b2-40ff376f3e64',
     category: 'Liniatur',
     name: 'Kariert',
     description: 'Karierte Seiten',
   },
   // Kugelschreiber
   {
-    id: '10000000-0000-4000-8000-000000000029',
-    productId: '66666666-6666-4666-8666-666666666666',
+    id: '6a842079-0c88-48cb-8e45-420d0a03622a',
+    productId: 'b374b990-5fa8-42be-b55f-11be732af24d',
     category: 'Farbe',
     name: 'Blau',
     description: 'Deckendes Schwarz',
   },
   // Feuerzeug
   {
-    id: '10000000-0000-4000-8000-000000000030',
-    productId: '77777777-7777-4777-8777-777777777777',
+    id: '73565261-61ec-440a-9c5f-2f19c87c74c9',
+    productId: '4583a6fe-43c7-48c1-9eb4-db73193448fb',
     category: 'Farbe',
     name: 'Schwarz',
     description: 'Deckendes Schwarz',
   },
   // Socken
   {
-    id: '10000000-0000-4000-8000-000000000031',
-    productId: '88888888-8888-4888-8888-888888888888',
+    id: '39bbd3e3-8c52-44a1-883c-cb47ffe0b06d',
+    productId: '2c4fbfbe-2aa6-453b-8436-9d1f39d801da',
     category: 'Farbe',
     name: 'Schwarz',
     description: 'Deckendes Schwarz',
   },
   {
-    id: '10000000-0000-4000-8000-000000000032',
-    productId: '88888888-8888-4888-8888-888888888888',
+    id: '7ff332c1-b503-4311-839c-8d7c0a0669d2',
+    productId: '2c4fbfbe-2aa6-453b-8436-9d1f39d801da',
     category: 'Größe',
     name: '35-38',
     description: 'Größe 35-38',
   },
   {
-    id: '10000000-0000-4000-8000-000000000033',
-    productId: '88888888-8888-4888-8888-888888888888',
+    id: 'd3686369-fbe3-4435-867b-82e177542edd',
+    productId: '2c4fbfbe-2aa6-453b-8436-9d1f39d801da',
     category: 'Größe',
     name: '39-42',
     description: 'Größe 39-42',
   },
   {
-    id: '10000000-0000-4000-8000-000000000034',
-    productId: '88888888-8888-4888-8888-888888888888',
+    id: '1b5fa95d-83b2-412a-9880-461e7a86ea83',
+    productId: '2c4fbfbe-2aa6-453b-8436-9d1f39d801da',
     category: 'Größe',
     name: '43-46',
     description: 'Größe 43-46',
   },
   {
-    id: '10000000-0000-4000-8000-000000000035',
-    productId: '44444444-4444-4444-8444-444444444444',
+    id: '7a006bbd-6fcd-4868-9138-730d8b257a51',
+    productId: '152869f3-6394-4f31-bba7-d5d6ce81f080',
     category: 'Farbe',
     name: 'weiß',
     description: 'Farbe weiß',
   },
   {
-    id: '10000000-0000-4000-8000-000000000036',
-    productId: '44444444-4444-4444-8444-444444444444',
+    id: 'ebee1ded-7e98-4b6f-aedd-dd1e44518040',
+    productId: '152869f3-6394-4f31-bba7-d5d6ce81f080',
     category: 'Größe',
     name: 'A4',
     description: 'Größe A4',
-  },
-];
-
-export const userData: UserCreateManyInput[] = [{ id: '9aaca58e-4ea2-4008-bfc7-2007cd91c0f1', email: 'test@test.example', name: 'Test' }];
-
-export const ordersData: OrderCreateManyInput[] = [
-  { id: '20000000-0000-4000-8000-000000000001', userId: userData[0].id! },
-  { id: '20000000-0000-4000-8000-000000000002', userId: userData[0].id! },
-  { id: '20000000-0000-4000-8000-000000000003', userId: userData[0].id! },
-  { id: '20000000-0000-4000-8000-000000000004', userId: userData[0].id! },
-  { id: '20000000-0000-4000-8000-000000000005', userId: userData[0].id! },
-  { id: '20000000-0000-4000-8000-000000000006', userId: userData[0].id! },
-  { id: '20000000-0000-4000-8000-000000000007', userId: userData[0].id! },
-  { id: '20000000-0000-4000-8000-000000000008', userId: userData[0].id! },
-  { id: '20000000-0000-4000-8000-000000000009', userId: userData[0].id! },
-  { id: '20000000-0000-4000-8000-000000000010', userId: userData[0].id! },
-];
-
-// Reihenfolge der Produkte je Bestellung: T-Shirt, Pullijacke, Tiffiletten, DinA4 Block,
-// Notizheft, Kugelschreiber, Feuerzeug, T-Shirt, Pullijacke, Tiffiletten
-export const ordersItemData: OrderItemCreateManyInput[] = [
-  {
-    id: '30000000-0000-4000-8000-000000000001',
-    orderId: ordersData[0].id!,
-    productId: productsData[0].id!, // T-Shirt
-    name: productsData[0].name,
-    description: productsData[0].description,
-    quantity: 1,
-  },
-  {
-    id: '30000000-0000-4000-8000-000000000002',
-    orderId: ordersData[1].id!,
-    productId: productsData[1].id!, // Pullijacke
-    name: productsData[1].name,
-    description: productsData[1].description,
-    quantity: 1,
-  },
-  {
-    id: '30000000-0000-4000-8000-000000000003',
-    orderId: ordersData[2].id!,
-    productId: productsData[2].id!, // Tiffiletten
-    name: productsData[2].name,
-    description: productsData[2].description,
-    quantity: 1,
-  },
-  {
-    id: '30000000-0000-4000-8000-000000000004',
-    orderId: ordersData[3].id!,
-    productId: productsData[3].id!, // DinA4 Block
-    name: productsData[3].name,
-    description: productsData[3].description,
-    quantity: 3,
-  },
-  {
-    id: '30000000-0000-4000-8000-000000000005',
-    orderId: ordersData[4].id!,
-    productId: productsData[4].id!, // Notizheft
-    name: productsData[4].name,
-    description: productsData[4].description,
-    quantity: 2,
-  },
-  {
-    id: '30000000-0000-4000-8000-000000000006',
-    orderId: ordersData[5].id!,
-    productId: productsData[5].id!, // Kugelschreiber
-    name: productsData[5].name,
-    description: productsData[5].description,
-    quantity: 5,
-  },
-  {
-    id: '30000000-0000-4000-8000-000000000007',
-    orderId: ordersData[6].id!,
-    productId: productsData[6].id!, // Feuerzeug
-    name: productsData[6].name,
-    description: productsData[6].description,
-    quantity: 2,
-  },
-  {
-    id: '30000000-0000-4000-8000-000000000008',
-    orderId: ordersData[7].id!,
-    productId: productsData[0].id!, // T-Shirt
-    name: productsData[0].name,
-    description: productsData[0].description,
-    quantity: 2,
-  },
-  {
-    id: '30000000-0000-4000-8000-000000000009',
-    orderId: ordersData[8].id!,
-    productId: productsData[1].id!, // Pullijacke
-    name: productsData[1].name,
-    description: productsData[1].description,
-    quantity: 1,
-  },
-  {
-    id: '30000000-0000-4000-8000-000000000010',
-    orderId: ordersData[9].id!,
-    productId: productsData[2].id!, // Tiffiletten
-    name: productsData[2].name,
-    description: productsData[2].description,
-    quantity: 1,
-  },
-];
-
-export const orderItemVariantData: OrderItemVariantCreateManyInput[] = [
-  // Bestellung 1: T-Shirt, Schwarz, M
-  {
-    id: '40000000-0000-4000-8000-000000000001',
-    orderItemId: ordersItemData[0].id!,
-    productVariantId: productVariantsData[0].id!, // Farbe Schwarz
-    category: productVariantsData[0].category,
-    name: productVariantsData[0].name,
-    description: productVariantsData[0].description,
-  },
-  {
-    id: '40000000-0000-4000-8000-000000000002',
-    orderItemId: ordersItemData[0].id!,
-    productVariantId: productVariantsData[2].id!, // Größe M
-    category: productVariantsData[2].category,
-    name: productVariantsData[2].name,
-    description: productVariantsData[2].description,
-  },
-  // Bestellung 2: Pullijacke, Schwarz, L
-  {
-    id: '40000000-0000-4000-8000-000000000003',
-    orderItemId: ordersItemData[1].id!,
-    productVariantId: productVariantsData[7].id!, // Farbe Schwarz
-    category: productVariantsData[7].category,
-    name: productVariantsData[7].name,
-    description: productVariantsData[7].description,
-  },
-  {
-    id: '40000000-0000-4000-8000-000000000004',
-    orderItemId: ordersItemData[1].id!,
-    productVariantId: productVariantsData[10].id!, // Größe L
-    category: productVariantsData[10].category,
-    name: productVariantsData[10].name,
-    description: productVariantsData[10].description,
-  },
-  // Bestellung 3: Tiffiletten, Schwarz, 42
-  {
-    id: '40000000-0000-4000-8000-000000000005',
-    orderItemId: ordersItemData[2].id!,
-    productVariantId: productVariantsData[14].id!, // Farbe Schwarz
-    category: productVariantsData[14].category,
-    name: productVariantsData[14].name,
-    description: productVariantsData[14].description,
-  },
-  {
-    id: '40000000-0000-4000-8000-000000000006',
-    orderItemId: ordersItemData[2].id!,
-    productVariantId: productVariantsData[20].id!, // Größe 42
-    category: productVariantsData[20].category,
-    name: productVariantsData[20].name,
-    description: productVariantsData[20].description,
-  },
-  // Bestellung 4: DinA4 Block - keine Varianten
-  // Bestellung 5: Notizheft, Schwarz, Kariert
-  {
-    id: '40000000-0000-4000-8000-000000000007',
-    orderItemId: ordersItemData[4].id!,
-    productVariantId: productVariantsData[26].id!, // Farbe Schwarz
-    category: productVariantsData[26].category,
-    name: productVariantsData[26].name,
-    description: productVariantsData[26].description,
-  },
-  {
-    id: '40000000-0000-4000-8000-000000000008',
-    orderItemId: ordersItemData[4].id!,
-    productVariantId: productVariantsData[27].id!, // Kariert
-    category: productVariantsData[27].category,
-    name: productVariantsData[27].name,
-    description: productVariantsData[27].description,
-  },
-  // Bestellung 6: Kugelschreiber, Schwarz
-  {
-    id: '40000000-0000-4000-8000-000000000009',
-    orderItemId: ordersItemData[5].id!,
-    productVariantId: productVariantsData[28].id!, // Farbe Schwarz
-    category: productVariantsData[28].category,
-    name: productVariantsData[28].name,
-    description: productVariantsData[28].description,
-  },
-  // Bestellung 7: Feuerzeug, Schwarz
-  {
-    id: '40000000-0000-4000-8000-000000000010',
-    orderItemId: ordersItemData[6].id!,
-    productVariantId: productVariantsData[29].id!, // Farbe Schwarz
-    category: productVariantsData[29].category,
-    name: productVariantsData[29].name,
-    description: productVariantsData[29].description,
-  },
-  // Bestellung 8: T-Shirt, Schwarz, XXL
-  {
-    id: '40000000-0000-4000-8000-000000000011',
-    orderItemId: ordersItemData[7].id!,
-    productVariantId: productVariantsData[0].id!, // Farbe Schwarz
-    category: productVariantsData[0].category,
-    name: productVariantsData[0].name,
-    description: productVariantsData[0].description,
-  },
-  {
-    id: '40000000-0000-4000-8000-000000000012',
-    orderItemId: ordersItemData[7].id!,
-    productVariantId: productVariantsData[5].id!, // Größe XXL
-    category: productVariantsData[5].category,
-    name: productVariantsData[5].name,
-    description: productVariantsData[5].description,
-  },
-  // Bestellung 9: Pullijacke, Schwarz, 3XL
-  {
-    id: '40000000-0000-4000-8000-000000000013',
-    orderItemId: ordersItemData[8].id!,
-    productVariantId: productVariantsData[7].id!, // Farbe Schwarz
-    category: productVariantsData[7].category,
-    name: productVariantsData[7].name,
-    description: productVariantsData[7].description,
-  },
-  {
-    id: '40000000-0000-4000-8000-000000000014',
-    orderItemId: ordersItemData[8].id!,
-    productVariantId: productVariantsData[13].id!, // Größe 3XL
-    category: productVariantsData[13].category,
-    name: productVariantsData[13].name,
-    description: productVariantsData[13].description,
-  },
-  // Bestellung 10: Tiffiletten, Schwarz, 45
-  {
-    id: '40000000-0000-4000-8000-000000000015',
-    orderItemId: ordersItemData[9].id!,
-    productVariantId: productVariantsData[14].id!, // Farbe Schwarz
-    category: productVariantsData[14].category,
-    name: productVariantsData[14].name,
-    description: productVariantsData[14].description,
-  },
-  {
-    id: '40000000-0000-4000-8000-000000000016',
-    orderItemId: ordersItemData[9].id!,
-    productVariantId: productVariantsData[23].id!, // Größe 45
-    category: productVariantsData[23].category,
-    name: productVariantsData[23].name,
-    description: productVariantsData[23].description,
   },
 ];
