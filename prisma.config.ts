@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-dotenv.configDotenv({ path: '.env.local' });
+dotenv.configDotenv({ path: '.env.prod' });
 dotenv.config();
 
 import { defineConfig, env } from 'prisma/config';
