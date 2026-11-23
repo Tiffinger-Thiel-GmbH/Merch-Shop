@@ -15,7 +15,7 @@ ENV NODE_ENV=production
 WORKDIR /app
 
 COPY --from=build /app/package.json /app/package-lock.json ./
-RUN npm ci && npm cache clean --force
+COPY --from=build /app/node_modules /app/node_modules
 
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/prisma ./prisma
