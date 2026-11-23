@@ -24,4 +24,4 @@ COPY --from=build /app/src/generated ./src/generated
 COPY --from=build /app/assets ./assets
 
 EXPOSE 3000
-CMD ["npm", "run", "start:prod"]
+CMD ["npm", "run", "primsa migrate deploy", "&&", "npm", "run", "start:prod"]

@@ -5,7 +5,7 @@ import { AppModule } from './app.module';
 
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
-  app.enableCors({ origin: ['https://localhost:3978'] });
+  app.enableCors({ origin: [process.env.BOT_URL] });
   process.on('unhandledRejection', err => console.error(err));
   const config = new DocumentBuilder()
     .setTitle('Merch Shop Products & Orders')
