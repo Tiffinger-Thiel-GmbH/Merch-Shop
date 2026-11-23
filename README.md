@@ -9,6 +9,14 @@ npm run prisma generate
 
 ```
 
+## Run the full stack with Docker Compose
+
+```sh
+docker compose up --build
+```
+
+This starts the API at <http://localhost:3000>, Swagger at <http://localhost:3000/api>, PostgreSQL, and the Mailpit inbox at <http://localhost:8025>. The API applies pending Prisma migrations at startup. PostgreSQL data is kept in the `postgres_data` volume.
+
 ## Starting the API
 
 ```sh
