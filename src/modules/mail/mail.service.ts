@@ -31,11 +31,11 @@ export class MailService implements OnModuleInit {
   }
 
   async sendMail(options: { subject: string; html: string; text?: string; from?: string }): Promise<SMTPTransport.SentMessageInfo> {
-    this.logger.debug('sendMail called', process.env.APPROVER_EMAIL);
+    this.logger.debug('sendMail called', process.env.MAIL_TO);
     try {
       const info = await this.transporter.sendMail({
         from: options.from ?? process.env.MAIL_FROM ?? 'no-reply@example.com',
-        to: process.env.APPROVER_EMAIL,
+        to: process.env.MAIL_TO,
         subject: options.subject,
         html: options.html,
         text: options.text,

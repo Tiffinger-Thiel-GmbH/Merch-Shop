@@ -3,7 +3,7 @@ import 'dotenv/config';
 import { Pool } from 'pg';
 import { PrismaPg } from '@prisma/adapter-pg';
 import { PrismaClient } from '../generated/prisma/client';
-import { orderItemVariantData, ordersData, ordersItemData, productsData, productVariantsData, userData } from './seed-data';
+import { productsData, productVariantsData } from './seed-data';
 
 const connectionString = process.env.DATABASE_URL!;
 const pool = new Pool({ connectionString });
@@ -19,40 +19,8 @@ async function main(): Promise<void> {
     });
   }
 
-  for (const data of userData) {
-    await prisma.user.upsert({
-      where: { id: data.id },
-      update: data,
-      create: data,
-    });
-  }
-
-  for (const data of ordersData) {
-    await prisma.order.upsert({
-      where: { id: data.id },
-      update: data,
-      create: data,
-    });
-  }
-
   for (const data of productVariantsData) {
     await prisma.productVariant.upsert({
-      where: { id: data.id },
-      update: data,
-      create: data,
-    });
-  }
-
-  for (const data of ordersItemData) {
-    await prisma.orderItem.upsert({
-      where: { id: data.id },
-      update: data,
-      create: data,
-    });
-  }
-
-  for (const data of orderItemVariantData) {
-    await prisma.orderItemVariant.upsert({
       where: { id: data.id },
       update: data,
       create: data,
