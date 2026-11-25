@@ -9,9 +9,24 @@ import { UserModule } from './modules/user/user.module';
 import { MailModule } from './modules/mail/mail.module';
 import { AssetsModule } from './modules/assets/assets.module';
 import { LoggingMiddleware } from './modules/logging/loggingMiddleware';
+import { ThrottlerModule } from '@nestjs/throttler';
+import { APP_GUARD } from '@nestjs/core';
+import { UserThrottlerGuard } from './guards/user-throttler-guard';
 
 @Module({
   imports: [
+    ThrottlerModule.forRoot([
+      {
+        name: 'long',
+        ttl: 60000,
+        limit: 150,
+      },
+      {
+        name: 'short',
+        ttl: 1000,
+        limit: 10,
+      },
+    ]),
     ConfigModule.forRoot(),
     PrismaModule,
     ProductModule,
@@ -21,6 +36,12 @@ import { LoggingMiddleware } from './modules/logging/loggingMiddleware';
     UserModule,
     MailModule,
     AssetsModule,
+  ],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: UserThrottlerGuard,
+    },
   ],
 })
 export class AppModule {

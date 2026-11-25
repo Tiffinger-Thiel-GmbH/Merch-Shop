@@ -3,7 +3,9 @@ import { AssetsService } from './assets.service';
 import { ApiOkResponse, ApiParam, ApiProduces } from '@nestjs/swagger';
 import { AssetParams } from './dts/asset-param';
 import type { Response } from 'express';
+import { SkipThrottle } from '@nestjs/throttler';
 
+@SkipThrottle()
 @Controller('assets')
 export class AssetsController {
   constructor(private readonly assetsService: AssetsService) {}
